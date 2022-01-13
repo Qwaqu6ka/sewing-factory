@@ -1,5 +1,5 @@
 <template>
-    <div class="Order">
+    <div class="Order" @click="push_to_id">
         <img v-if="wait" class="Order_img" src="@/assets/icons/waiting_status.svg">
         <img v-if="reject" class="Order_img" src="@/assets/icons/reject_status.svg">
         <img v-if="complete" class="Order_img" src="@/assets/icons/complete_status.svg">
@@ -17,8 +17,9 @@
 </template>
 
 <script>
+import { push } from "vue-router"
 export default {
-    name: "ProductInstance",
+    name: "OrderInstance",
     props: {
         card: {
             type: Object,
@@ -40,6 +41,11 @@ export default {
             reject,
         }
     },
+    methods: {
+        push_to_id(){
+            push("/orders/"+this.card.id)
+        }
+    }
 }
 </script>
 
@@ -53,7 +59,7 @@ export default {
         align-items: center;
         justify-content: flex-start;
         margin-left: 80px;
-        margin-right: 80px; 
+        margin-right: 80px;
         background-color: #EEF9FF;
         padding: 20px;
 

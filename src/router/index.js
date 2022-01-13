@@ -5,6 +5,7 @@ import Materials from '../views/Materials.vue'
 import Accessories from '../views/Accessories.vue'
 import Orders from '../views/Orders.vue'
 import Profile from '../views/Profile.vue'
+import OrderDetails from '../views/OrderDetails.vue'
 
 const routes = [
     {
@@ -31,6 +32,11 @@ const routes = [
         path: '/orders',
         name: 'Orders',
         component: Orders
+    },
+    {
+        path: '/orders/:id',
+        name: 'Orders details',
+        component: OrderDetails
     },
     {
         path: '/profile',

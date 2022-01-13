@@ -21,31 +21,37 @@ export default {
         return {
             cards: [
                 {
+                    id: 1,
                     number:"88005553535",
                     customer:"Покой",
                     status: 1,
                 },
                 {
+                    id: 2,
                     number:"12342",
                     customer:"Кто прочитал, тот здохнет 0_o",
                     status: 2,
                 },
                 {
+                    id: 3,
                     number:"42667557",
                     customer:"Я стал трансгендерной посфеминисткой",
                     status: 3,
                 },
                 {
+                    id: 4,
                     number:"87560434",
                     customer:"Холодый ветер из жопы выдувает кал",
                     status: 4,
                 },
                 {
+                    id: 5,
                     number:"87560",
                     customer:"Холодый ветер из жопы выдувает кал",
                     status: 5,
                 },
                 {
+                    id: 6,
                     number:"sdfasdf",
                     customer:"Холодый ветер из жопы выдувает кал",
                     status: "4323",
