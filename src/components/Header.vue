@@ -5,7 +5,7 @@
                 <a class="Nav_dropbutton">
                     <img 
                         class="Nav_img"
-                        src="@/assets/icons/products.svg" 
+                        src="@/assets/icons/products_active.svg" 
                         alt=""
                     >
                     Номенклатура
@@ -21,7 +21,7 @@
                 <div class="Nav_elem">
                     <img 
                         class="Nav_img" 
-                        src="@/assets/icons/orders.svg" 
+                        src="@/assets/icons/orders_active.svg" 
                         alt=""
                     >
                     <span class="Nav_text">Заказы</span>
@@ -32,7 +32,7 @@
                 <div class="Nav_elem">
                     <img 
                         class="Nav_img" 
-                        src="@/assets/icons/profile.svg" 
+                        src="@/assets/icons/profile_active.svg" 
                         alt=""
                     >
                     <span class="Nav_text">Профиль</span>
