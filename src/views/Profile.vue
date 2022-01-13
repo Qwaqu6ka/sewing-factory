@@ -55,13 +55,7 @@ export default {
         }
 
         &_button {
-            background-color: #FF6C2E;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
             margin-top: 20px;
-            font-size: 1.25rem;
         }
     }
 </style>
