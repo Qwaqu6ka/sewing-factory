@@ -1,9 +1,8 @@
 import { createStore } from 'vuex';
 
 import axios from 'axios';
-axios.defaults.withCredentials = true;
 
-const baseURL = "sewing.mrfox131.software/api/v1/"
+const baseURL = "http://sewing.mrfox131.software/api/v1/"
 
 export default createStore({
     state: {
@@ -15,16 +14,14 @@ export default createStore({
         }
     },
     actions: {
-        login({commit}, login, password) {
+        login({commit}, payload) {
             return new Promise((resolve, reject) => {
                 axios.post(baseURL + "plane_login",
-                    {
-                        login: login,
-                        password: password
-                    }
+                    payload
                 ).then((response) => {
                     console.log("Logged in successfully")
-                    commit("setToken", response.data.token)
+                    console.log(response)
+                    commit("setToken", response.data.access_token)
                     resolve()
                 }).catch((err) => {
                     console.log(err)

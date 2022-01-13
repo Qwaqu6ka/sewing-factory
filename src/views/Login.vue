@@ -4,23 +4,47 @@
             <h1 class="Login_title">Вход</h1>
 
             <div class="form__group field">
-                <input type="input" class="form__field" placeholder="Логин" name="login" id='login' required />
+                <input type="input" class="form__field" placeholder="Логин" name="login" id='login' required v-model="login"/>
                 <label for="login" class="form__label">Логин</label>
             </div>
 
             <div class="form__group field">
-                <input type="password" class="form__field" placeholder="Пароль" name="pass" id='pass' required />
+                <input type="password" class="form__field" placeholder="Пароль" name="pass" id='pass' required v-model="password"/>
                 <label for="pass" class="form__label">Пароль</label>
             </div>
 
-            <button class="Login_button" type="button">Войти</button>
+            <button class="Login_button" type="button" @click="onLogin">Войти</button>
         </div>
     </div>
 </template>
 
 <script>
+import {ref} from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 export default {
     name: "Login",
+    setup() {
+        const login = ref('')
+        const password = ref('')
+        const store = useStore()
+        const router = useRouter()
+
+        const onLogin = function() {
+            store.dispatch("login", {login: login.value, password: password.value}).then(() => {
+                console.log("logined")
+                router.push("/nomenclature/products");
+            })
+        }
+
+
+
+        return {
+            login,
+            password,
+            onLogin
+        }
+    }
 }
 </script>
 
@@ -100,9 +124,9 @@ export default {
             transition: 0.2s;
             font-size: 1rem;
             color: $primary;
-            font-weight:700;    
+            font-weight:700;
         }
-        padding-bottom: 6px;  
+        padding-bottom: 6px;
         font-weight: 700;
         border-width: 3px;
         border-image: linear-gradient(to right, $primary,$secondary);
