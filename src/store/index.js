@@ -1,12 +1,14 @@
 import { createStore } from 'vuex';
 
 import axios from 'axios';
+import createPersistedState from "vuex-persistedstate";
 
 const baseURL = "http://sewing.mrfox131.software/api/v1/"
 
 export default createStore({
     state: {
         token: '',
+        baseStaticURL: "http://sewing.mrfox131.software/"
     },
     mutations: {
         setToken(state, token){
@@ -90,7 +92,55 @@ export default createStore({
                 })
             })
         },
+        getOrders({state}) {
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL+"order",
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response)=>{
+                        resolve(response.data)
+                    }).catch((err)=>{
+                    reject(err)
+                })
+            })
+        },
+        getAccessoryDetails({state}, article) {
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL+"accessory_with_info/"+article,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response)=>{
+                        resolve(response.data)
+                    }).catch((err)=>{
+                    reject(err)
+                })
+            })
+        },
+        accessoryDecommission({ state }, payload) {
+            return new Promise((resolve, reject) => {
+                axios.patch(baseURL+"accessory/"+payload.article+"?quantity="+payload.count.toString(),
+                    {
+                    },
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                .then((response)=>{
+                    resolve()
+                }).catch((err)=>{
+                    reject(err)
+                })
+            })
+        }
     },
     modules: {
-    }
+    },
+    plugins: [createPersistedState()]
 })

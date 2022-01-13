@@ -1,6 +1,6 @@
 <template>
-    <div class="Product">
-        <img class="Product_img" src="@/assets/icons/profile.svg" alt="">
+    <div @click="clicked" class="Product">
+        <img class="Product_img" :src="card.image" alt="">
         <div class="Product_description">
             <span class="Product_name">{{ card.name }}</span>
             <span class="Product_article">Артикул: {{ card.article }}</span>
@@ -9,6 +9,9 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { useRouter } from "vue-router";
+
 export default {
     name: "ProductInstance",
     props: {
@@ -16,7 +19,22 @@ export default {
             type: Object,
             requred: true
         }
+    },
+    setup(props) {
+        const store = useStore();
+        const router = useRouter();
+        props.card.image = store.state.baseStaticURL + props.card.image
+
+        const clicked = () => {
+            router.push("accessories/"+props.card.article.toString())
+        }
+
+        return{
+            card: props.card,
+            clicked
+        }
     }
+
 }
 </script>
 
@@ -32,7 +50,7 @@ export default {
         align-items: flex-start;
         justify-content: flex-start;
         margin-left: 80px;
-        margin-right: 80px; 
+        margin-right: 80px;
         background-color: #EEF9FF;
         transition: box-shadow 0.25s ease-in-out;
 

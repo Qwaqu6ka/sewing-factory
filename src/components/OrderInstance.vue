@@ -9,15 +9,17 @@
             <span class="Order_feature Order_text">Статус:</span>
         </div>
         <div class="Order_feautersContainer">
-            <span class="Order_value Order_text">{{ card.number }}</span>
-            <span class="Order_value Order_text">{{ card.customer }}</span>
-            <span class="Order_value Order_text">{{ card.status }}</span>
+            <span class="Order_value Order_text">{{ card.id }}</span>
+            <span class="Order_value Order_text">{{ card.customer.name }}</span>
+            <span class="Order_value Order_text">{{ card.stage }}</span>
         </div>
     </div>
 </template>
 
 <script>
-import { push } from "vue-router"
+
+import { useRouter } from 'vue-router';
+
 export default {
     name: "OrderInstance",
     props: {
@@ -39,11 +41,12 @@ export default {
             complete,
             wait,
             reject,
+            router: useRouter()
         }
     },
     methods: {
         push_to_id(){
-            push("/orders/"+this.card.id)
+            this.router.push("/orders/"+this.card.id)
         }
     }
 }
