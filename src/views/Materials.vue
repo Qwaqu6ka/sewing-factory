@@ -1,7 +1,7 @@
 <template>
     <div class="Layout">
         <div class="InnerLayout">
-            <h2 class="Title">Список материалов</h2>
+            <h2 class="Title">Список тканей</h2>
             <ProductInstance
                 class="Instance"
                 v-for="card of cards"
@@ -14,35 +14,48 @@
 
 <script>
 import ProductInstance from "@/components/ProductInstance.vue"
+import { useStore } from 'vuex';
+import { ref } from 'vue';
 
 export default {
     name: 'Materials',
-    data() {
+    setup() {
+        const cards = ref([])
+        const store = useStore()
+        store.dispatch('getClothes').then((data)=> {
+            cards.value = data
+        })
         return {
-            cards: [
-                {
-                    img:"",
-                    name:"Покой",
-                    article:"P1ecE",
-                },
-                {
-                    img:"",
-                    name:"Кто прочитал, тот здохнет 0_o",
-                    article:"умер дед",
-                },
-                {
-                    img:"",
-                    name:"Я стал трансгендерной посфеминисткой",
-                    article:"равенство",
-                },
-                {
-                    img:"",
-                    name:"Холодый ветер из жопы выдувает кал",
-                    article:"ненавижу владивосток",
-                },
-            ],
+            cards
         }
+
     },
+    // data() {
+    //     return {
+    //         cards: [
+    //             {
+    //                 img:"",
+    //                 name:"Покой",
+    //                 article:"P1ecE",
+    //             },
+    //             {
+    //                 img:"",
+    //                 name:"Кто прочитал, тот здохнет 0_o",
+    //                 article:"умер дед",
+    //             },
+    //             {
+    //                 img:"",
+    //                 name:"Я стал трансгендерной посфеминисткой",
+    //                 article:"равенство",
+    //             },
+    //             {
+    //                 img:"",
+    //                 name:"Холодый ветер из жопы выдувает кал",
+    //                 article:"ненавижу владивосток",
+    //             },
+    //         ],
+    //     }
+    // },
     components: {
         ProductInstance,
     }
