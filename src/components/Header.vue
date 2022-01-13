@@ -2,7 +2,7 @@
     <header>
         <nav class="Nav">
             <div class="Nav_dropdown">
-                <a class="Nav_dropbutton">
+                <a class="Nav_dropbutton Nav_link">
                     <img 
                         class="Nav_img"
                         src="@/assets/icons/products_active.svg" 
@@ -74,10 +74,6 @@ header {
         padding: 12px 16px;
         text-decoration: none;
         transition: color 0.25s ease-in-out;
-        
-        &:hover, &:active, &.router-link-active {
-            color: #FF6C2E;
-        }
     }
 
     &_img {
@@ -115,8 +111,10 @@ header {
         }
     }
 
-    &_text {
-        
+    &_link {
+        &:hover, &:active, &.router-link-active {
+            color: #FF6C2E;
+        }
     }
 }
 /* Change color of dropdown links on hover */

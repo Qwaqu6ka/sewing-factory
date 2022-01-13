@@ -4,7 +4,7 @@
             <h1 class="Login_title">Вход</h1>
 
             <div class="Login_form form__group field">
-                <input type="input" class="form__field" placeholder="Логин" name="login" id='login' required v-model="login"/>
+                <input class="form__field" placeholder="Логин" name="login" id='login' required v-model="login"/>
                 <label for="login" class="form__label">Логин</label>
             </div>
 
