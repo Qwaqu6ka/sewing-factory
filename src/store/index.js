@@ -186,7 +186,39 @@ export default createStore({
                     reject(err)
                 })
             })
-        }
+        },
+        getProductInfo({state}, article) {
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL+"product/"+article,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response)=>{
+                        resolve(response.data)
+                    })
+                    .catch((err)=>{
+                        reject(err)
+                    })
+            })
+        },
+        getPreviousProducts({state}, article) {
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL+"product/"+article+"/previous",
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response)=>{
+                        resolve(response.data)
+                    })
+                    .catch((err)=>{
+                        reject(err)
+                    })
+            })
+        },
     },
     modules: {
     },

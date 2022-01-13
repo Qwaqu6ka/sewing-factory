@@ -22,6 +22,11 @@ const routes = [
         component: Products
     },
     {
+        path: '/nomenclature/products/:id',
+        name: 'Products details',
+        component: ProductDetail
+    },
+    {
         path: '/nomenclature/materials',
         name: 'Materials',
         component: Materials

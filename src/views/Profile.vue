@@ -10,12 +10,14 @@
 
 <script>
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router'
 import { ref } from 'vue';
 
 export default {
     setup() {
         const userdata = ref({})
         const store = useStore()
+        const router = useRouter()
 
         store.dispatch('getProfile').then((data)=> {
             data.role = ({
@@ -30,7 +32,10 @@ export default {
 
         return {
             userdata,
-            logout: store.commit.bind(null, 'setToken', '')
+            logout: ()=>{
+                store.commit.bind(null, 'setToken', '')
+                router.push("/")
+            }
         }
 
     },
