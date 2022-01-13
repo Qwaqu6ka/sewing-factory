@@ -18,6 +18,10 @@ export default {
         card: {
             type: Object,
             requred: true
+        },
+        activeRole: {
+            type: String,
+            required: true
         }
     },
     setup(props) {
@@ -26,7 +30,7 @@ export default {
         props.card.image = store.state.baseStaticURL + props.card.image
 
         const clicked = () => {
-            router.push("accessories/"+props.card.article.toString())
+            router.push(props.activeRole+"/"+props.card.article.toString())
         }
 
         return{

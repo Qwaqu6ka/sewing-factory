@@ -3,6 +3,7 @@
         <div class="InnerLayout">
             <h2 class="Title">Список выпускаемой продукции</h2>
             <ProductInstance
+                activeRole="products"
                 class="Instance"
                 v-for="card of cards"
                 v-bind:key="card.article"
