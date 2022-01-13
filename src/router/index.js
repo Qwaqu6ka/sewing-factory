@@ -30,6 +30,11 @@ const routes = [
         component: Accessories
     },
     {
+        path: '/nomenclature/accessories/:id',
+        name: 'Accessories detail',
+        component: AccessoriesDetail
+    },
+    {
         path: '/orders',
         name: 'Orders',
         component: Orders

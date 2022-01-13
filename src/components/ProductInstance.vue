@@ -1,5 +1,5 @@
 <template>
-    <div class="Product">
+    <div @click="clicked" class="Product">
         <img class="Product_img" :src="card.image" alt="">
         <div class="Product_description">
             <h5 class="Product_name">{{ card.name }}</h5>
@@ -10,6 +10,7 @@
 
 <script>
 import { useStore } from 'vuex';
+import { useRouter } from "vue-router";
 
 export default {
     name: "ProductInstance",
@@ -21,10 +22,16 @@ export default {
     },
     setup(props) {
         const store = useStore();
+        const router = useRouter();
         props.card.image = store.state.baseStaticURL + props.card.image
 
+        const clicked = () => {
+            router.push("accessories/"+props.card.article.toString())
+        }
+
         return{
-            card: props.card
+            card: props.card,
+            clicked
         }
     }
 

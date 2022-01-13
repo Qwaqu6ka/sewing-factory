@@ -107,6 +107,38 @@ export default createStore({
                 })
             })
         },
+        getAccessoryDetails({state}, article) {
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL+"accessory_with_info/"+article,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response)=>{
+                        resolve(response.data)
+                    }).catch((err)=>{
+                    reject(err)
+                })
+            })
+        },
+        accessoryDecommission({ state }, payload) {
+            return new Promise((resolve, reject) => {
+                axios.patch(baseURL+"accessory/"+payload.article+"?quantity="+payload.count.toString(),
+                    {
+                    },
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                .then((response)=>{
+                    resolve()
+                }).catch((err)=>{
+                    reject(err)
+                })
+            })
+        }
     },
     modules: {
     },
