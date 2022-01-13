@@ -8,7 +8,7 @@
                         src="@/assets/icons/products_active.svg" 
                         alt=""
                     >
-                    Номенклатура
+                    <span class="Nav_text">Номенклатура</span>
                 </a>
                 <div class="Nav_droplinks">
                     <router-link to="/nomenclature/products">Готовая продукция</router-link>
@@ -73,6 +73,11 @@ header {
         color: black;
         padding: 12px 16px;
         text-decoration: none;
+        transition: color 0.25s ease-in-out;
+        
+        &:hover, &:active, &.router-link-active {
+            color: #FF6C2E;
+        }
     }
 
     &_img {
@@ -108,6 +113,10 @@ header {
             font-size: none;
             display: block;
         }
+    }
+
+    &_text {
+        
     }
 }
 /* Change color of dropdown links on hover */

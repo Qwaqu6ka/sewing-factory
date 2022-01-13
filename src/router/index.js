@@ -6,6 +6,7 @@ import Accessories from '../views/Accessories.vue'
 import Orders from '../views/Orders.vue'
 import Profile from '../views/Profile.vue'
 import OrderDetails from '../views/OrderDetails.vue'
+import AccessoriesDetail from '../views/AccessoriesDetail.vue'
 
 const routes = [
     {
