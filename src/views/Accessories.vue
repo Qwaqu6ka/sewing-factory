@@ -14,35 +14,47 @@
 
 <script>
 import ProductInstance from "@/components/ProductInstance.vue"
+import {ref} from "vue";
+import {useStore} from "vuex";
 
 export default {
     name: 'Accessories',
-    data() {
+    setup() {
+        const cards = ref([])
+        const store = useStore()
+        store.dispatch('getAccessories').then((data)=> {
+            cards.value = data
+        })
         return {
-            cards: [
-                {
-                    img:"",
-                    name:"Покой",
-                    article:"P1ecE",
-                },
-                {
-                    img:"",
-                    name:"Кто прочитал, тот здохнет 0_o",
-                    article:"умер дед",
-                },
-                {
-                    img:"",
-                    name:"Я стал трансгендерной посфеминисткой",
-                    article:"равенство",
-                },
-                {
-                    img:"",
-                    name:"Холодый ветер из жопы выдувает кал",
-                    article:"ненавижу владивосток",
-                },
-            ],
+            cards
         }
     },
+    // data() {
+    //     return {
+    //         cards: [
+    //             {
+    //                 img:"",
+    //                 name:"Покой",
+    //                 article:"P1ecE",
+    //             },
+    //             {
+    //                 img:"",
+    //                 name:"Кто прочитал, тот здохнет 0_o",
+    //                 article:"умер дед",
+    //             },
+    //             {
+    //                 img:"",
+    //                 name:"Я стал трансгендерной посфеминисткой",
+    //                 article:"равенство",
+    //             },
+    //             {
+    //                 img:"",
+    //                 name:"Холодый ветер из жопы выдувает кал",
+    //                 article:"ненавижу владивосток",
+    //             },
+    //         ],
+    //     }
+    // },
     components: {
         ProductInstance,
     }
