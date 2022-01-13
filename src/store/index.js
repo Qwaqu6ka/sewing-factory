@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 
 import axios from 'axios';
 import createPersistedState from "vuex-persistedstate";
+import resolve from "resolve";
 
 const baseURL = "http://sewing.mrfox131.software/api/v1/"
 
@@ -135,6 +136,53 @@ export default createStore({
                 .then((response)=>{
                     resolve()
                 }).catch((err)=>{
+                    reject(err)
+                })
+            })
+        },
+        getClothDetails({state}, article) {
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL+"cloth/"+article,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response)=>{
+                        resolve(response.data)
+                    }).catch((err)=>{
+                    reject(err)
+                })
+            })
+        },
+        getClothById({state}, article) {
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL+"cloth_by_id/"+article,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response)=>{
+                        resolve(response.data)
+                    })
+                    .catch((err)=>{
+                        reject(err)
+                    })
+            })
+        },
+        clothDecommission({state}, payload) {
+            return new Promise((resolve,reject) => {
+                axios.patch(baseURL+"cloth/"+payload.article+"/"+payload.number+"?length="+payload.length.toString(),
+                    {
+                        length: payload.length
+                    },
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    }
+                ).then((response) => {resolve()}).catch(err => {
                     reject(err)
                 })
             })

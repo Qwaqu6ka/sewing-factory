@@ -1,18 +1,20 @@
 <template>
     <div class="Roll">
-        <span class="Roll_num">Номер: {{ item.num }}</span>
-        <span class="Roll_num">Длина: {{ item.len }}</span>
+        <span class="Roll_num">Номер: {{ item.number }}</span>
+        <span class="Roll_num">Длина: {{ item.length }}</span>
         <div class="Cancel">
             <div class="form__group field">
-                <input type="input" class="form__field" placeholder="Количество" :name="item.num" :id='item.num' required v-model="login"/>
-                <label :for="item.num" class="form__label">Количество</label>
+                <input class="form__field" placeholder="Количество" :name="item.number" :id='item.number' type="number" required v-model="length"/>
+                <label :for="item.number" class="form__label">Количество</label>
             </div>
-            <button class="Cancel_button Button" type="button">Списать</button>
+            <button class="Cancel_button Button" type="button" @click="onDecommission">Списать</button>
         </div>
     </div>
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { ref } from 'vue';
 export default {
     name: "Roll",
     props: {
@@ -21,6 +23,23 @@ export default {
             required: true,
         },
     },
+    setup(props) {
+        const item = ref(props.item);
+        const store = useStore()
+        const length= ref (0)
+        const onDecommission = () => {
+            store.dispatch("clothDecommission", {article: props.item.article, number: props.item.number, length: length.value})
+            .then(()=>{
+                item.value.length -= length.value
+            })
+        }
+        return {
+            item,
+            onDecommission,
+            length
+        }
+
+    }
 }
 </script>
 

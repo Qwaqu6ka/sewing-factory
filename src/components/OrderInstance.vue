@@ -30,11 +30,11 @@ export default {
     },
     data() {
         let complete = false, wait = false, reject = false
-        if (this.card.status == 2 || this.card.status == 4)
+        if (this.card.stage == 2 || this.card.stage == 4)
             complete = true
-        else if (this.card.status == 1)
+        else if (this.card.stage == 1)
             wait = true
-        else if (this.card.status == 3)
+        else if (this.card.stage == 3)
             reject = true
 
         return {
