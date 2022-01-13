@@ -2,23 +2,24 @@
     <div class="Layout">
     <div class="InnerLayout">
         <div class="Item">
-        <img class="Item_img" :src="baseStaticURL+data.image" alt="">
-        <div class="Item_table">
-            <div class="Item_properties">
-                <span class="Item_property">Артикул</span>
-                <span class="Item_property">Название</span>
-                <span class="Item_property">Цвет</span>
-                <span class="Item_property">Изображение</span>
-                <span class="Item_property">Ширина</span>
-                <span class="Item_property">Цена за метр</span>
-            </div>
-            <div class="Item_properties">
-                <span class="Item_property">{{data.article}}</span>
-                <span class="Item_property">{{data.name}}</span>
-                <span class="Item_property">{{ data.color }}</span>
-                <span class="Item_property">{{ data.print }}</span>
-                <span class="Item_property">{{ data.width }}</span>
-                <span class="Item_property">{{ data.price }}</span>
+            <img class="Item_img" :src="baseStaticURL+data.image" alt="">
+            <div class="Item_table">
+                <div class="Item_properties">
+                    <span class="Item_property">Артикул</span>
+                    <span class="Item_property">Название</span>
+                    <span class="Item_property">Цвет</span>
+                    <span class="Item_property">Изображение</span>
+                    <span class="Item_property">Ширина</span>
+                    <span class="Item_property">Цена за метр</span>
+                </div>
+                <div class="Item_properties">
+                    <span class="Item_property">{{data.article}}</span>
+                    <span class="Item_property">{{data.name}}</span>
+                    <span class="Item_property">{{ data.color }}</span>
+                    <span class="Item_property">{{ data.print }}</span>
+                    <span class="Item_property">{{ data.width }}</span>
+                    <span class="Item_property">{{ data.price }}</span>
+                </div>
             </div>
         </div>
 
