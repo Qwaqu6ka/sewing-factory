@@ -7,12 +7,14 @@ import Orders from '../views/Orders.vue'
 import Profile from '../views/Profile.vue'
 import OrderDetails from '../views/OrderDetails.vue'
 import AccessoriesDetail from '../views/AccessoriesDetail.vue'
+import MaterialDetail from '../views/MaterialDetail.vue'
+
 
 const routes = [
     {
         path: '/',
         name: 'Login',
-        component: Login
+        component: MaterialDetail
     },
     {
         path: '/nomenclature/products',

@@ -111,7 +111,7 @@ $gray: #9f9f9f;
     font-size: 1.25rem;
     transition: background-color 0.25s ease-in-out;
 
-    &:hover, &:active, &:focus {
+    &:hover, &:active {
         background-color: $secondary;
     }
 }
