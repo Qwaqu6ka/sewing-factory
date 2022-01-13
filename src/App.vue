@@ -18,6 +18,7 @@ export default {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-size: 1.5rem;
     font-family: 'Poppins', sans-serif; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
