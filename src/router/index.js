@@ -14,7 +14,7 @@ const routes = [
     {
         path: '/',
         name: 'Login',
-        component: MaterialDetail
+        component: Login
     },
     {
         path: '/nomenclature/products',

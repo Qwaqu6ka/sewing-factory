@@ -62,6 +62,11 @@ export default {
         margin-right: 80px;
         background-color: #EEF9FF;
         padding: 20px;
+        transition: box-shadow 0.25s ease-in-out;
+
+        &:hover, &:focus {
+            box-shadow: 5px 10px 16px 0px rgba(0,0,0,0.5);
+        }
 
         &_img {
             width: 100px;
