@@ -14,8 +14,8 @@
 
 <script>
 import ProductInstance from "@/components/ProductInstance.vue"
-import {ref} from "vue";
-import {useStore} from "vuex";
+import { ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
     name: 'Products',

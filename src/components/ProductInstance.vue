@@ -1,6 +1,6 @@
 <template>
     <div class="Product">
-        <img class="Product_img" src="@/assets/icons/profile.svg" alt="">
+        <img class="Product_img" :src="card.image" alt="">
         <div class="Product_description">
             <h5 class="Product_name">{{ card.name }}</h5>
             <span class="Product_article">Артикул: {{ card.article }}</span>
@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+
 export default {
     name: "ProductInstance",
     props: {
@@ -16,7 +18,16 @@ export default {
             type: Object,
             requred: true
         }
+    },
+    setup(props) {
+        const store = useStore();
+        props.card.image = store.state.baseStaticURL + props.card.image
+
+        return{
+            card: props.card
+        }
     }
+
 }
 </script>
 
@@ -30,7 +41,7 @@ export default {
         align-items: flex-start;
         justify-content: flex-start;
         margin-left: 80px;
-        margin-right: 80px; 
+        margin-right: 80px;
         background-color: #EEF9FF;
 
         &_img {

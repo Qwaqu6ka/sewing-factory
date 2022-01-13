@@ -1,20 +1,39 @@
 <template>
     <div class="Layout">
         <div class="ProfileCard">
-            <span class="ProfileCard_name">Клевчау Юрий Александрович</span>
-            <span class="ProfileCard_account">Тип аккаунта: {{ accountType }}</span>
-            <button class="ProfileCard_button" type="button">Выйти</button>
+            <span class="ProfileCard_name">{{ userdata.name }}</span>
+            <span class="ProfileCard_account">Тип аккаунта: {{ userdata.role }}</span>
+            <button class="ProfileCard_button" type="button" @click="logout">Выйти</button>
         </div>
     </div>
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { ref } from 'vue';
+
 export default {
-    data() {
+    setup() {
+        const userdata = ref({})
+        const store = useStore()
+
+        store.dispatch('getProfile').then((data)=> {
+            data.role = ({
+                "1": "Заказчик",
+                "2": "Менеджер",
+                "3": "Кладовщик",
+                "4": "Швея",
+                "5": "Директор"
+            })[data.role.toString()]
+            userdata.value = data
+        })
+
         return {
-            accountType: "Бог"
+            userdata,
+            logout: store.commit.bind(null, 'setToken', '')
         }
-    }
+
+    },
 }
 </script>
 

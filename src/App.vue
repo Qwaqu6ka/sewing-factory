@@ -1,6 +1,24 @@
 <template>
     <Header/>
-    <router-view/>
+<!--    <router-view v-slot="{ Component }">-->
+<!--        <template v-if="Component">-->
+<!--&lt;!&ndash;            <transition mode="out-in">&ndash;&gt;-->
+<!--                <keep-alive>-->
+<!--                    <suspense>-->
+<!--                        <component :is="Component"></component>-->
+<!--                        <template #fallback>-->
+<!--                            <div class="Layout">-->
+<!--                                <div class="InnerLayout">-->
+<!--                                    huihui-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </template>-->
+<!--                    </suspense>-->
+<!--                </keep-alive>-->
+<!--&lt;!&ndash;            </transition>&ndash;&gt;-->
+<!--        </template>-->
+<!--    </router-view>-->
+    <router-view></router-view>
 </template>
 
 <script>
@@ -19,7 +37,7 @@ export default {
     flex-direction: column;
     min-height: 100vh;
     font-size: 1.5rem;
-    font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
