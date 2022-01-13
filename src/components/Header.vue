@@ -11,13 +11,13 @@
                     Номенклатура
                 </a>
                 <div class="Nav_droplinks">
-                    <router-link to="/">Готовая продукция</router-link>
-                    <router-link to="/">Материалы</router-link>
-                    <router-link to="/">Фурнитура</router-link>
+                    <router-link to="/nomenclature/products">Готовая продукция</router-link>
+                    <router-link to="/nomenclature/materials">Материалы</router-link>
+                    <router-link to="/nomenclature/accessories">Фурнитура</router-link>
                 </div>
             </div>
 
-            <router-link class="Nav_link" to="/">
+            <router-link class="Nav_link" to="/orders">
                 <div class="Nav_elem">
                     <img 
                         class="Nav_img" 
@@ -28,7 +28,7 @@
                 </div>
             </router-link>
             
-            <router-link class="Nav_link" to="/">
+            <router-link class="Nav_link" to="/profile">
                 <div class="Nav_elem">
                     <img 
                         class="Nav_img" 

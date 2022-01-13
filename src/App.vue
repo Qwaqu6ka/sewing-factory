@@ -1,7 +1,5 @@
 <template>
     <Header/>
-    <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> -->
         
     <router-view/>
 </template>
@@ -32,6 +30,12 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.InnerLayout {
+    flex-grow: 1;
+    background-color: white;
+    width: 65vw;
 }
 
 @function toRem($size) {
