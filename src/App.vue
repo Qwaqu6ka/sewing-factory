@@ -58,6 +58,40 @@ export default {
     width: 65vw;
 }
 
+// Стили таблиц в детализациях
+.Item {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    margin-top: 40px;
+    align-items: flex-start;
+
+    &_table {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &_img {
+        display: block;
+        max-width: 300px;
+        height: auto;
+        object-fit: scale-down;
+        margin-right: 30px;
+    }
+
+    &_properties {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &_property {
+        border: solid 1px;
+        padding: 20px;
+        font-size: 1.25rem;
+    }
+}
+
+// Стили для input'ов
 $primary: #FF6C2E;
 $secondary: #db5015;
 $white: black;

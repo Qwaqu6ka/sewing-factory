@@ -66,7 +66,7 @@ export default {
 
         &_form {
             margin-top: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
     }
 </style>

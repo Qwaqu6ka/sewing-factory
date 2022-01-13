@@ -17,7 +17,7 @@ export default {
     props: {
         card: {
             type: Object,
-            requred: true
+            required: true
         }
     },
     setup(props) {

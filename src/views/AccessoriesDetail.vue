@@ -3,33 +3,35 @@
     <div class="InnerLayout">
         <h2 class="Title" style="text-align:center;">{{ data.accessory.name }}</h2> <br>
         <div class="Item">
-        <img class="Item_img" :src="baseStaticURL+data.accessory.image" alt="">
-        <div class="Item_table">
-            <div class="Item_properties">
-                <span class="Item_property">Артикул</span>
-                <span class="Item_property">Тип</span>
-                <span class="Item_property">Длина</span>
-                <span class="Item_property">Ширина</span>
-                <span class="Item_property">Вес</span>
-                <span class="Item_property">Количество</span>
-            </div>
-            <div class="Item_properties">
-                <span class="Item_property">{{ data.article }}</span>
-                <span class="Item_property">{{ data.accessory.type }}</span>
-                <span class="Item_property">{{ data.accessory.length }}</span>
-                <span class="Item_property">{{ data.accessory.width }}</span>
-                <span class="Item_property">{{ data.accessory.weight }}</span>
-                <span class="Item_property">{{ data.count }}</span>
+            <img class="Item_img" :src="baseStaticURL+data.accessory.image" alt="">
+            <div class="Item_table">
+                <div class="Item_properties">
+                    <span class="Item_property">Наименование</span>
+                    <span class="Item_property">Артикул</span>
+                    <span class="Item_property">Тип</span>
+                    <span class="Item_property">Длина</span>
+                    <span class="Item_property">Ширина</span>
+                    <span class="Item_property">Вес</span>
+                    <span class="Item_property">Количество</span>
+                </div>
+                <div class="Item_properties">
+                    <span class="Item_property">{{ data.accessory.name }}</span>
+                    <span class="Item_property">{{ data.article }}</span>
+                    <span class="Item_property">{{ data.accessory.type }}</span>
+                    <span class="Item_property">{{ data.accessory.length }}</span>
+                    <span class="Item_property">{{ data.accessory.width }}</span>
+                    <span class="Item_property">{{ data.accessory.weight }}</span>
+                    <span class="Item_property">{{ data.count }}</span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="Cancel">
-        <div class="form__group field">
-            <input type="number" class="form__field" placeholder="Количество товара" name="name"  id='name' required v-model="count"/>
-            <label for="name" class="form__label">Количество товара</label>
+        <div class="Cancel">
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Количество товара" name="name"  id='name' required v-model="count"/>
+                <label for="name" class="form__label">Количество товара</label>
+            </div>
+            <button class="Cancel_button Button" type="button" @click="onDecommision">Списать</button>
         </div>
-        <button class="Cancel_button Button" type="button" @click="onDecommision">Списать</button>
-    </div>
     </div>
     </div>
 </template>
@@ -39,7 +41,6 @@
 import { useStore } from "vuex";
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-import accessories from "./Accessories";
 
 export default {
     name: "AccessoriesDetail",

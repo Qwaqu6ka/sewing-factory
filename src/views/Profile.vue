@@ -3,7 +3,7 @@
         <div class="ProfileCard">
             <span class="ProfileCard_name">{{ userdata.name }}</span>
             <span class="ProfileCard_account">Тип аккаунта: {{ userdata.role }}</span>
-            <button class="ProfileCard_button" type="button" @click="logout">Выйти</button>
+            <button class="ProfileCard_button Button" type="button" @click="logout">Выйти</button>
         </div>
     </div>
 </template>

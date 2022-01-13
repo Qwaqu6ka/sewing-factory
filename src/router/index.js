@@ -8,7 +8,7 @@ import Profile from '../views/Profile.vue'
 import OrderDetails from '../views/OrderDetails.vue'
 import AccessoriesDetail from '../views/AccessoriesDetail.vue'
 import MaterialDetail from '../views/MaterialDetail.vue'
-
+import ProductDetail from '../views/ProductDetail.vue'
 
 const routes = [
     {
