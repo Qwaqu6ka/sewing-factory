@@ -45,6 +45,7 @@
             </div>
         </div>
 
+        <h2 v-if="prev.length > 0" class="Title">История изменеий</h2>
         <ProductHistory
             v-for="item in prev"
             :key="item.id"
@@ -189,5 +190,9 @@ export default {
                 }
             }
         }
+    }
+
+    .Title {
+        margin-left: 80px;
     }
 </style>
