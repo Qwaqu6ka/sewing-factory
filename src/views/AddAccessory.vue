@@ -5,10 +5,10 @@
             <h2 class="Login_title" v-if="success">Успешно создана</h2>
             <h2 class="Login_title" v-if="error">Возникла ошибка, проверьте артикул</h2>
             <form  @submit="onSubmit">
-                <div class="Login_form form__group field" style="text-align:left;">
-                    <input class="form__field" placeholder="Обновить" name="update" v-model="update" type="checkbox"/>
-                    <label for="login" class="form__label">Обновить</label>
-                </div>
+<!--                <div class="Login_form form__group field" style="text-align:left;">-->
+<!--                    <input class="form__field" placeholder="Обновить" name="update" v-model="update" type="checkbox"/>-->
+<!--                    <label for="login" class="form__label">Обновить</label>-->
+<!--                </div>-->
 
                 <div class="Login_form form__group field">
                     <input class="form__field" placeholder="Артикул" name="article" required v-model="article"/>
@@ -67,6 +67,7 @@ export default {
         const store = useStore()
         const error = ref(false)
         const success = ref(false)
+        // const update = ref(false)
 
         let onSubmit = e => {
             e.preventDefault();
@@ -79,6 +80,7 @@ export default {
             formData.append('article', article.value)
             formData.append('width', width.value)
             formData.append('image', document.getElementById('smth').files[0])
+            // formData.append('update', update.value)
             store.dispatch("createNewAccessory", formData)
             .then((data) => {
                 error.value = false
@@ -99,7 +101,8 @@ export default {
             type,
             article,
             error,
-            success
+            success,
+            // update
         }
     }
 }

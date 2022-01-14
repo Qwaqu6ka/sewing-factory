@@ -1,8 +1,7 @@
-import { createStore } from 'vuex';
+import {createStore} from 'vuex';
 
 import axios from 'axios';
 import createPersistedState from "vuex-persistedstate";
-import resolve from "resolve";
 
 const baseURL = "http://sewing.mrfox131.software/api/v1/"
 
@@ -12,7 +11,7 @@ export default createStore({
         baseStaticURL: "http://sewing.mrfox131.software/"
     },
     mutations: {
-        setToken(state, token){
+        setToken(state, token) {
             state.token = token;
         }
     },
@@ -35,145 +34,144 @@ export default createStore({
         getProfile({state}) {
             return new Promise((resolve, reject) => {
                 axios.get(
-                    baseURL+"me",
+                    baseURL + "me",
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     }
-                ).then((response)=>{
+                ).then((response) => {
                     resolve(response.data);
-                }).catch((err)=>{
+                }).catch((err) => {
                     reject(err)
                 })
             })
         },
         getClothes({state}) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"cloth",
+                axios.get(baseURL + "cloth",
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
-                    }).catch((err)=>{
-                        reject(err)
-                    })
+                    }).catch((err) => {
+                    reject(err)
+                })
             })
         },
         getAccessories({state}) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"accessory",
+                axios.get(baseURL + "accessory",
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
-                    }).catch((err)=>{
+                    }).catch((err) => {
                     reject(err)
                 })
             })
         },
         getProducts({state}) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"product",
+                axios.get(baseURL + "product",
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
-                    }).catch((err)=>{
+                    }).catch((err) => {
                     reject(err)
                 })
             })
         },
         getOrders({state}) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"order",
+                axios.get(baseURL + "order",
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
-                    }).catch((err)=>{
+                    }).catch((err) => {
                     reject(err)
                 })
             })
         },
         getAccessoryDetails({state}, article) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"accessory_with_info/"+article,
+                axios.get(baseURL + "accessory_with_info/" + article,
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
-                    }).catch((err)=>{
+                    }).catch((err) => {
                     reject(err)
                 })
             })
         },
-        accessoryDecommission({ state }, payload) {
+        accessoryDecommission({state}, payload) {
             return new Promise((resolve, reject) => {
-                axios.patch(baseURL+"accessory/"+payload.article+"?quantity="+payload.count.toString(),
-                    {
-                    },
+                axios.patch(baseURL + "accessory/" + payload.article + "?quantity=" + payload.count.toString(),
+                    {},
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                .then((response)=>{
-                    resolve()
-                }).catch((err)=>{
+                    .then((response) => {
+                        resolve()
+                    }).catch((err) => {
                     reject(err)
                 })
             })
         },
         getClothDetails({state}, article) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"cloth/"+article,
+                axios.get(baseURL + "cloth/" + article,
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
-                    }).catch((err)=>{
+                    }).catch((err) => {
                     reject(err)
                 })
             })
         },
         getClothById({state}, article) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"cloth_by_id/"+article,
+                axios.get(baseURL + "cloth_by_id/" + article,
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
                     })
-                    .catch((err)=>{
+                    .catch((err) => {
                         reject(err)
                     })
             })
         },
         clothDecommission({state}, payload) {
-            return new Promise((resolve,reject) => {
-                axios.patch(baseURL+"cloth/"+payload.article+"/"+payload.number+"?length="+payload.length.toString(),
+            return new Promise((resolve, reject) => {
+                axios.patch(baseURL + "cloth/" + payload.article + "/" + payload.number + "?length=" + payload.length.toString(),
                     {
                         length: payload.length
                     },
@@ -182,50 +180,63 @@ export default createStore({
                             "Authorization": "Bearer " + state.token
                         }
                     }
-                ).then((response) => {resolve()}).catch(err => {
+                ).then((response) => {
+                    resolve()
+                }).catch(err => {
                     reject(err)
                 })
             })
         },
         getProductInfo({state}, article) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"product/"+article,
+                axios.get(baseURL + "product/" + article,
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
                     })
-                    .catch((err)=>{
+                    .catch((err) => {
                         reject(err)
                     })
             })
         },
         getPreviousProducts({state}, article) {
             return new Promise((resolve, reject) => {
-                axios.get(baseURL+"product/"+article+"/previous",
+                axios.get(baseURL + "product/" + article + "/previous",
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
-                    .then((response)=>{
+                    .then((response) => {
                         resolve(response.data)
                     })
-                    .catch((err)=>{
+                    .catch((err) => {
                         reject(err)
                     })
             })
         },
-        createNewAccessory({state}, payload){
+        createNewAccessory({state}, payload) {
             return new Promise((resolve, reject) => {
-                resolve()
+                axios.post(
+                    baseURL + "accessory",
+                    payload,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                .then((data) => {
+                    resolve(data.data)
+                }).catch((err) => {
+                    reject(err)
+                })
             })
         }
     },
-    modules: {
-    },
+    modules: {},
     plugins: [createPersistedState()]
 })
