@@ -15,6 +15,9 @@
                     <router-link to="/nomenclature/materials">Материалы</router-link>
                     <router-link to="/nomenclature/accessories">Фурнитура</router-link>
                     <router-link to="/add/accessory">Добавить фурнитуру</router-link>
+                    <router-link to="/add/material">Добавить ткань</router-link>
+                    <router-link to="/add/product">Добавить продукт</router-link>
+                    
                 </div>
             </div>
 

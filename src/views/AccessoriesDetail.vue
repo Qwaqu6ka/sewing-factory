@@ -1,7 +1,6 @@
 <template>
     <div class="Layout">
     <div class="InnerLayout">
-        <h2 class="Title" style="text-align:center;">{{ data.accessory.name }}</h2> <br>
         <div class="Item">
             <img class="Item_img" :src="baseStaticURL+data.accessory.image" alt="">
             <div class="Item_table">
