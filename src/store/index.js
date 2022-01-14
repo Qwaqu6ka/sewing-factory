@@ -255,6 +255,38 @@ export default createStore({
                     reject(err)
                 })
             })
+        },
+        getOrderInfo({state}, article){
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL + "order/" + article,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response) => {
+                        resolve(response.data)
+                    })
+                    .catch((err) => {
+                        reject(err)
+                    })
+            })
+        },
+        getOrderProducts({state}, article) {
+                return new Promise((resolve, reject) => {
+                    axios.get(baseURL + "get_products_by_order_id/" + article,
+                        {
+                            headers: {
+                                "Authorization": "Bearer " + state.token
+                            }
+                        })
+                        .then((response) => {
+                            resolve(response.data)
+                        })
+                        .catch((err) => {
+                            reject(err)
+                        })
+                })
         }
     },
     modules: {},

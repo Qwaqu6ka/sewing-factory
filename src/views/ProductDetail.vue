@@ -20,8 +20,10 @@
                 </div>
             </div>
         </div>
+
         <div class="Used">
             <div class="Used_clothes">
+                {{data.comment}}<br>
                 Используемые ткани:
                 <router-link
                     class="Used_link"

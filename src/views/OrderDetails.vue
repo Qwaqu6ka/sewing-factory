@@ -2,14 +2,13 @@
     <div class="Layout">
     <div class="InnerLayout">
         <div class="OrderDetails">
-            <h2 class="OrderDetails_text">Заказ (номер)</h2>
-            <span class="OrderDetails_text">Дата создания: </span>
-            <span class="OrderDetails_text">Дата завершения: </span>
-            <span class="OrderDetails_text">Статус: </span>
-            <span class="OrderDetails_text">Менеджер: </span>
-            <span class="OrderDetails_text">Покупатель: </span>
-            <span class="OrderDetails_text">Сумма заказа: </span>
-            <span class="OrderDetails_text">Комментарий: </span>
+            <h2 class="OrderDetails_text">Заказ {{order.id}}</h2>
+            <span class="OrderDetails_text">Дата создания: {{order.creation_date}}</span>
+            <span class="OrderDetails_text">Дата завершения: {{order.completion_date}}</span>
+            <span class="OrderDetails_text">Статус: {{order.stage}}</span>
+            <span class="OrderDetails_text">Менеджер: {{order.manager.name}}</span>
+            <span class="OrderDetails_text">Покупатель: {{order.customer.name}}</span>
+            <span class="OrderDetails_text">Сумма заказа: {{order.cost}}</span>
         </div>
         <div class="OrderTable">
             <div class="OrderTable_row">
@@ -29,11 +28,34 @@
 
 <script>
 import TableElem from "@/components/OrderTableElem.vue"
+import { useStore } from 'vuex';
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default {
     name: "OrderDetails",
     components: {
         TableElem,
+    },
+    setup() {
+        const order = ref({})
+        const data = ref([])
+        const store = useStore()
+        const route = useRoute()
+
+        store.dispatch("getOrderInfo", route.params.id).then((data) => {
+            order.value = data
+        })
+
+        store.dispatch("getOrderProducts", route.params.id).then((data_) => {
+            data.value = data_
+        })
+
+        return {
+            order,
+            data
+        }
+
     },
     data() {
         return {
