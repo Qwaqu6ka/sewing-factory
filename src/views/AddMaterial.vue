@@ -1,7 +1,7 @@
 <template>
     <div class="Layout">
         <div class="InnerLayout">
-            <h1 class="Login_title">Создать фурнитуру</h1>
+            <h1 class="Login_title">Создать ткань</h1>
             <h2 class="Login_title" v-if="success">Успешно создана</h2>
             <h2 class="Login_title" v-if="error">Возникла ошибка, проверьте артикул</h2>
             <form  @submit="onSubmit">
@@ -10,26 +10,25 @@
                     <input class="form__field" placeholder="Артикул" name="article" required v-model="article"/>
                     <label for="article" class="form__label">Артикул</label>
                 </div>
-
                 <div class="AddInput Login_form form__group field">
                     <input class="form__field" placeholder="Название" name="name"  required v-model="name"/>
                     <label for="name" class="form__label">Название</label>
                 </div>
                 <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Тип" name="type"  required v-model="type"/>
-                    <label for="type" class="form__label">Тип</label>
+                    <input class="form__field" placeholder="Цвет" name="color"  required v-model="color" type="number"/>
+                    <label for="color" class="form__label">Цвет</label>
+                </div>
+                <div class="AddInput Login_form form__group field">
+                    <input class="form__field" placeholder="Принт" name="print"  required v-model="print"/>
+                    <label for="print" class="form__label">Принт</label>
                 </div>
                 <div class="AddInput Login_form form__group field">
                     <input class="form__field" placeholder="Ширина" name="width"  required type="number" v-model="width"/>
                     <label for="width" class="form__label">Ширина</label>
                 </div>
                 <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Длина" name="length"  required v-model="length" type="number"/>
-                    <label for="length" class="form__label">Длина</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Вес" name="weight"  required v-model="weight" type="number"/>
-                    <label for="weight" class="form__label">Вес</label>
+                    <input class="form__field" placeholder="Состав" name="composition"  required v-model="composition"/>
+                    <label for="composition" class="form__label">Состав</label>
                 </div>
                 <div class="AddInput Login_form form__group field">
                     <input class="form__field" placeholder="Цена" name="price"  required v-model="price" type="number"/>
@@ -108,7 +107,7 @@ export default {
     form {
         max-width: 70%;
     }
-    
+
     .InnerLayout {
         display: flex;
         align-items: center;
