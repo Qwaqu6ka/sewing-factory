@@ -48,6 +48,7 @@ export default {
         })
 
         store.dispatch("getOrderProducts", route.params.id).then((data_) => {
+            console.log(data_)
             data.value = data_
         })
 
@@ -57,26 +58,26 @@ export default {
         }
 
     },
-    data() {
-        return {
-            data: [
-                {
-                    product: {
-                        name: "prod1",
-                        article: 1,
-                    },
-                    count: 5,
-                },
-                {
-                    product: {
-                        name: "prod2",
-                        article: 2,
-                    },
-                    count: 25,
-                },
-            ],
-        }
-    }
+    // data() {
+    //     return {
+    //         data: [
+    //             {
+    //                 product: {
+    //                     name: "prod1",
+    //                     article: 1,
+    //                 },
+    //                 count: 5,
+    //             },
+    //             {
+    //                 product: {
+    //                     name: "prod2",
+    //                     article: 2,
+    //                 },
+    //                 count: 25,
+    //             },
+    //         ],
+    //     }
+    // }
 }
 </script>
 

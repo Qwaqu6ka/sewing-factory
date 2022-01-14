@@ -16,6 +16,13 @@ export default {
     props: {
         product: Object,
         count: Number,
+    },
+    setup(props) {
+        console.log(props.product)
+        return {
+            product: props.product,
+            count: props.count,
+        }
     }
 }
 </script>
