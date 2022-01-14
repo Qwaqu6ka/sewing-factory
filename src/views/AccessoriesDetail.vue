@@ -16,7 +16,7 @@
                 </div>
                 <div class="Item_properties">
                     <span class="Item_property">{{ data.accessory.name }}</span>
-                    <span class="Item_property">{{ data.article }}</span>
+                    <span class="Item_property">{{ data.accessory.article }}</span>
                     <span class="Item_property">{{ data.accessory.type }}</span>
                     <span class="Item_property">{{ data.accessory.length }}</span>
                     <span class="Item_property">{{ data.accessory.width }}</span>

@@ -108,18 +108,38 @@ export default createStore({
             })
         },
         getAccessoryDetails({state}, article) {
-            return new Promise((resolve, reject) => {
-                axios.get(baseURL + "accessory_with_info/" + article,
+            return new Promise(async (resolve, reject) => {
+                let data = {}
+                axios.get(baseURL + "accessory_by_id/" + article,
                     {
                         headers: {
                             "Authorization": "Bearer " + state.token
                         }
                     })
                     .then((response) => {
-                        resolve(response.data)
+                        data.accessory = response.data
+                        console.log("data1: ", data)
+                        axios.get(baseURL + "accessory/" + article,
+                            {
+                                headers: {
+                                    "Authorization": "Bearer " + state.token
+                                }
+                            })
+                            .then((response) => {
+                                data = {
+                                    ...(response.data),
+                                    accessory: data.accessory
+                                }
+                                resolve(data)
+                                console.log("data2: ", data)
+                            }).catch((err) => {
+                            reject(err)
+                        })
                     }).catch((err) => {
-                    reject(err)
-                })
+                        reject(err)
+                    })
+
+
             })
         },
         accessoryDecommission({state}, payload) {
