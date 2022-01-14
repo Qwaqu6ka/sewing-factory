@@ -3,9 +3,9 @@
         <nav class="Nav">
             <div class="Nav_dropdown">
                 <a class="Nav_dropbutton Nav_link">
-                    <img 
+                    <img
                         class="Nav_img"
-                        src="@/assets/icons/products_active.svg" 
+                        src="@/assets/icons/products_active.svg"
                         alt=""
                     >
                     <span class="Nav_text">Номенклатура</span>
@@ -14,25 +14,26 @@
                     <router-link to="/nomenclature/products">Готовая продукция</router-link>
                     <router-link to="/nomenclature/materials">Материалы</router-link>
                     <router-link to="/nomenclature/accessories">Фурнитура</router-link>
+                    <router-link to="/add/accessory">Добавить фурнитуру</router-link>
                 </div>
             </div>
 
             <router-link class="Nav_link" to="/orders">
                 <div class="Nav_elem">
-                    <img 
-                        class="Nav_img" 
-                        src="@/assets/icons/orders_active.svg" 
+                    <img
+                        class="Nav_img"
+                        src="@/assets/icons/orders_active.svg"
                         alt=""
                     >
                     <span class="Nav_text">Заказы</span>
                 </div>
             </router-link>
-            
+
             <router-link class="Nav_link" to="/profile">
                 <div class="Nav_elem">
-                    <img 
-                        class="Nav_img" 
-                        src="@/assets/icons/profile_active.svg" 
+                    <img
+                        class="Nav_img"
+                        src="@/assets/icons/profile_active.svg"
                         alt=""
                     >
                     <span class="Nav_text">Профиль</span>
@@ -68,7 +69,7 @@ header {
         align-items: center
     }
 
-    a { 
+    a {
         font-size: 1.25rem;
         color: black;
         padding: 12px 16px;

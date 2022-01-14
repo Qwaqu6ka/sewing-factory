@@ -219,6 +219,11 @@ export default createStore({
                     })
             })
         },
+        createNewAccessory({state}, payload){
+            return new Promise((resolve, reject) => {
+                resolve()
+            })
+        }
     },
     modules: {
     },

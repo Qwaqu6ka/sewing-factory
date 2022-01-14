@@ -9,6 +9,7 @@ import OrderDetails from '../views/OrderDetails.vue'
 import AccessoriesDetail from '../views/AccessoriesDetail.vue'
 import MaterialDetail from '../views/MaterialDetail.vue'
 import ProductDetail from '../views/ProductDetail.vue'
+import AddAccessory from "../views/AddAccessory";
 
 const routes = [
     {
@@ -64,6 +65,11 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: Profile
     },
+    {
+        path: '/add/accessory',
+        name: 'Add accessory',
+        component: AddAccessory
+    }
 ]
 
 const router = createRouter({
