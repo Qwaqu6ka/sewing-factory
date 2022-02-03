@@ -1,50 +1,48 @@
 <template>
     <Header/>
-<!--    <router-view v-slot="{ Component }">-->
-<!--        <template v-if="Component">-->
-<!--&lt;!&ndash;            <transition mode="out-in">&ndash;&gt;-->
-<!--                <keep-alive>-->
-<!--                    <suspense>-->
-<!--                        <component :is="Component"></component>-->
-<!--                        <template #fallback>-->
-<!--                            <div class="Layout">-->
-<!--                                <div class="InnerLayout">-->
-<!--                                    huihui-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </template>-->
-<!--                    </suspense>-->
-<!--                </keep-alive>-->
-<!--&lt;!&ndash;            </transition>&ndash;&gt;-->
-<!--        </template>-->
-<!--    </router-view>-->
-    <router-view></router-view>
+    <div class="ExternalLayout">
+        <div class="InnerLayout">
+            <router-view></router-view>
+        </div>
+    </div>
+    <Footer/>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+import {useStore} from 'vuex'
 
 export default {
+    setup() {
+        const store = useStore()
+        return {
+            profile: store.state.profile
+        }
+    },
     components: {
-        Header
+        Header,
+        Footer,
     }
 }
 </script>
 
 <style lang="scss">
+@import "@/styles/media.scss";
+@import "@/styles/variables.scss";
+
 #app {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-size: 1.5rem;
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-.Layout {
+.ExternalLayout {
     flex-grow: 1;
-    background-color: #057D9F;
+    background-color: $background-color;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,8 +52,16 @@ export default {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background-color: white;
+    background-color: $primary-color;
     width: 65vw;
+
+    @include vw-lg-down {
+        width: 85vw;
+    }
+
+    @include vw-md-down {
+        width: 100vw;
+    }
 }
 
 // Стили таблиц в детализациях
@@ -92,10 +98,10 @@ export default {
 }
 
 // Стили для input'ов
-$primary: #FF6C2E;
-$secondary: #db5015;
+$primary: $secondary-color;
+$secondary: $hover-secondary-color;
 $white: black;
-$gray: #9f9f9f;
+$gray: gray;
 .form__group {
     position: relative;
     padding: 15px 0 0;
@@ -105,7 +111,7 @@ $gray: #9f9f9f;
     font-family: inherit;
     width: 100%;
     border: 0;
-    border-bottom: 2px solid $gray;
+    border-bottom: 2px solid $secondary-font-color;
     outline: 0;
     font-size: 1.3rem;
     color: $white;
@@ -155,16 +161,19 @@ $gray: #9f9f9f;
 }
 
 .Button {
-    background-color: $primary;
-    color: white;
+    background-color: $secondary-color;
+    color: $primary-color;
     border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 1.25rem;
+    border-radius: 8px;
+    padding: 10px 30px 10px;
+    font-size: toRem(20px);
     transition: background-color 0.25s ease-in-out;
 
-    &:hover, &:active {
-        background-color: $secondary;
+    &:hover {
+        background-color: $hover-secondary-color;
+    }
+    &:active, &:focus {
+        background-color: $active-secondary-color;
     }
 }
 </style>

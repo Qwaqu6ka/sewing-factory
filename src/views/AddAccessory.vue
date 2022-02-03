@@ -1,48 +1,49 @@
 <template>
     <div class="Layout">
-        <div class="InnerLayout">
-            <h1 class="Login_title">Создать фурнитуру</h1>
-            <h2 class="Login_title" v-if="success">Успешно создана</h2>
-            <h2 class="Login_title" v-if="error">Возникла ошибка, проверьте артикул</h2>
-            <form  @submit="onSubmit">
+        <h1 class="Layout__title">Создать фурнитуру</h1>
+        <h2 class="Layout__title" v-if="success">Успешно создана</h2>
+        <h2 class="Layout__title" v-if="error">Возникла ошибка, проверьте артикул</h2>
+        
+        <form class="Form" @submit="onSubmit">
+            <div class="Form__group">
+                <span class="Form__title">Артикул</span>
+                <eva-input class="Form__input" placeholder="Артикул" status="warning" v-model="article" required/>
+            </div>
+            <div class="Form__group">
+                <span class="Form__title">Название</span>
+                <eva-input class="Form__input" placeholder="Название" status="warning" v-model="name" required/>
+            </div>
+            <div class="Form__group">
+                <span class="Form__title">Тип</span>
+                <eva-input class="Form__input" placeholder="Тип" status="warning" v-model="type" required/>
+            </div>
+            <div class="Form__group">
+                <span class="Form__title">Ширина</span>
+                <eva-input class="Form__input" placeholder="Ширина" status="warning" v-model="width" required type="number"/>
+            </div>
+            <div class="Form__group">
+                <span class="Form__title">Длина</span>
+                <eva-input class="Form__input" placeholder="Длина" status="warning" v-model="length" required type="number"/>
+            </div>
+            <div class="Form__group">
+                <span class="Form__title">Вес</span>
+                <eva-input class="Form__input" placeholder="Вес" status="warning" v-model="weight" required type="number"/>
+            </div>
+            <div class="Form__group">
+                <span class="Form__title">Цена</span>
+                <eva-input class="Form__input" placeholder="Цена" status="warning" v-model="price" required type="number"/>
+            </div>
+            <div class="Form__group Form__group_horizontal">
+                <span class="Form__title">Можно измерять в кг?</span>
+                <input class="Form__input" name="image" v-model="kg" type="checkbox"/>
+            </div>
+            <div class="Form__group Form__group_horizontal">
+                <span class="Form__title">Фото</span>
+                <input class="Form__input" id="photo" placeholder="Фото" name="image" required  type="file"/>
+            </div>
 
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Артикул" name="article" required v-model="article"/>
-                    <label for="article" class="form__label">Артикул</label>
-                </div>
-
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Название" name="name"  required v-model="name"/>
-                    <label for="name" class="form__label">Название</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Тип" name="type"  required v-model="type"/>
-                    <label for="type" class="form__label">Тип</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Ширина" name="width"  required type="number" v-model="width"/>
-                    <label for="width" class="form__label">Ширина</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Длина" name="length"  required v-model="length" type="number"/>
-                    <label for="length" class="form__label">Длина</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Вес" name="weight"  required v-model="weight" type="number"/>
-                    <label for="weight" class="form__label">Вес</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Цена" name="price"  required v-model="price" type="number"/>
-                    <label for="price" class="form__label">Цена</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input id="smth" class="form__field" placeholder="Фото" name="image"  required  type="file"/>
-                    <label for="imag" class="form__label">Фото</label>
-                </div>
-
-                <button class="Login_button Button" type="submit">Создать</button>
-            </form>
-        </div>
+            <button class="Button" type="submit">Создать</button>
+        </form>
     </div>
 </template>
 
@@ -54,15 +55,16 @@ export default {
     name: "AddAccessory",
     setup() {
         const name = ref('')
-        const price = ref(0)
-        const weight = ref(0)
-        const width = ref(0)
-        const length = ref(0)
+        const price = ref(null)
+        const weight = ref(null)
+        const width = ref(null)
+        const length = ref(null)
         const type = ref('')
-        const article = ref(0)
+        const article = ref(null)
         const store = useStore()
         const error = ref(false)
         const success = ref(false)
+        const kg = ref(false)
         // const update = ref(false)
 
         let onSubmit = e => {
@@ -75,7 +77,8 @@ export default {
             formData.append('type', type.value)
             formData.append('article', article.value)
             formData.append('width', width.value)
-            formData.append('image', document.getElementById('smth').files[0])
+            formData.append('kg_acceptable', kg.value)
+            formData.append('image', document.getElementById('photo').files[0])
             // formData.append('update', update.value)
             store.dispatch("createNewAccessory", formData)
             .then((data) => {
@@ -98,6 +101,7 @@ export default {
             article,
             error,
             success,
+            kg,
             // update
         }
     }
@@ -105,25 +109,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    form {
-        max-width: 70%;
-    }
-    
-    .InnerLayout {
+@import "@/styles/variables.scss";
+
+    .Layout {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        flex-grow: 1;
-        background-color: white;
-        button {
-            margin-top: 10px;
+    }
+
+    .Form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+
+            &_horizontal {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        &__title {
+            font-size: toRem(20px);
+            margin: 10px;
         }
     }
 
     .Button {
+        margin-top: 10px;
         margin-bottom: 30px;
-    }
-
-    .AddInput {
-        margin-bottom: 15px;
     }
 </style>

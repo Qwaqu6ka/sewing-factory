@@ -1,132 +1,137 @@
 <template>
     <header>
-        <nav class="Nav">
-            <div class="Nav_dropdown">
-                <a class="Nav_dropbutton Nav_link">
-                    <img
-                        class="Nav_img"
-                        src="@/assets/icons/products_active.svg"
-                        alt=""
-                    >
-                    <span class="Nav_text">Номенклатура</span>
-                </a>
-                <div class="Nav_droplinks">
-                    <router-link to="/nomenclature/products">Готовая продукция</router-link>
-                    <router-link to="/nomenclature/materials">Материалы</router-link>
-                    <router-link to="/nomenclature/accessories">Фурнитура</router-link>
-                    <router-link to="/add/accessory">Добавить фурнитуру</router-link>
-                    <router-link to="/add/material">Добавить ткань</router-link>
-                    <router-link to="/add/product">Добавить продукт</router-link>
-                    
-                </div>
-            </div>
+        <router-link to="/">
+           <img
+                class="Logo"
+                src="@/assets/icons/logo-white.svg" 
+                alt="logo"
+            >
+        </router-link>
+        
+        <Nav/>
 
-            <router-link class="Nav_link" to="/orders">
-                <div class="Nav_elem">
-                    <img
-                        class="Nav_img"
-                        src="@/assets/icons/orders_active.svg"
-                        alt=""
-                    >
-                    <span class="Nav_text">Заказы</span>
-                </div>
-            </router-link>
+        <a href="tel: {{ phoneNum }}" class="PhoneNum">
+            <img
+                src="@/assets/icons/phone.svg"
+                alt="Телефон"
+                class="PhoneNum__icon"
+            >
+            {{ phoneNum }}
+        </a>
 
-            <router-link class="Nav_link" to="/profile">
-                <div class="Nav_elem">
-                    <img
-                        class="Nav_img"
-                        src="@/assets/icons/profile_active.svg"
-                        alt=""
-                    >
-                    <span class="Nav_text">Профиль</span>
-                </div>
-            </router-link>
-        </nav>
+        <button type="button" class="offCanvasButton" v-if="!isOpen" @click="isOpen=true">
+            <img
+                src="@/assets/icons/offcanvas_button.svg"
+                alt="Меню"
+            >
+        </button>
+
+        <teleport to="body">
+            <Slide 
+                right :burgerIcon="false" 
+                :isOpen="isOpen" 
+                @closeMenu="isOpen = false" 
+                :closeOnNavigation="true"
+                noOverlay
+            >
+                <Nav :vertical="true" />
+            </Slide>
+        </teleport>
     </header>
 </template>
 
 <script>
+import Nav from '@/components/Nav.vue'
+import { Slide } from 'vue3-burger-menu'
+
 export default {
+    
     name: "Header",
+    components: {
+        Nav,
+        Slide,
+    },
+    data() {
+        return {
+            phoneNum: '8 (800)555-35-35',
+            isOpen: false,
+        }
+    }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@import "@/styles/variables.scss";
+@import "@/styles/media.scss";
+
 header {
     display: flex;
-    flex-direction: column;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background-color: #FFFCD6;
-}
-
-.Nav {
-    display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px 70px;
+    border: solid lightgray 1px;
 
-    &_elem {
-        display: flex;
-        flex-direction: column;
-        align-items: center
+    @include vw-md-down {
+        padding: 20px 0px;
+    }
+
+    .Logo {
+        margin-right: 30px;
+        margin-left: 10px;
+        width: 280px;
+
+        @include vw-md-down {
+            margin: 0;
+            width: 250px;
+        }
     }
 
     a {
-        font-size: 1.25rem;
-        color: black;
-        padding: 12px 16px;
         text-decoration: none;
-        transition: color 0.25s ease-in-out;
-    }
 
-    &_img {
-        width: 50px;
-        margin-bottom: 10px;
-        margin-left: 5px;
+        &:hover, &:active, &:focus {
+            text-decoration: underline;
+        }
     }
-
-    /* The container <div> - needed to position the dropdown content */
-    &_dropdown {
-        position: relative;
-        display: inline-block;
-    }
-
-    &_dropbutton {
+    .PhoneNum {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        color: $primary-font-color;
         align-items: center;
-        text-decoration: none;
-    }
+        height: 15%;
+        font-size: toRem(18px);
+        margin-left: 200px;
 
-    /* Dropdown Content (Hidden by Default) */
-    &_droplinks {
-        display: none;
-        position: absolute;
-        background-color: #EEF9FF;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
+        @include vw-xl-down {
+            margin-left: 30px;
+        }
 
-        /* Links inside the dropdown */
-        a {
-            font-size: none;
-            display: block;
+        @include vw-lg-down {
+            display: none;
+        }
+        
+        
+        &__icon {
+            height: 20px;
+            margin-right: 8px;
         }
     }
 
-    &_link {
-        &:hover, &:active, &.router-link-active {
-            color: #FF6C2E;
+    .offCanvasButton {
+        padding: 0;
+        margin: 0;
+        border: none;
+        background-color: white;
+        margin-left: auto;
+        margin-right: 20px;
+
+        @include vw-sm-up {
+            display: none;
         }
     }
 }
-/* Change color of dropdown links on hover */
-.Nav_droplinks a:hover {background-color: #D1EEFC;}
 
-/* Show the dropdown menu on hover */
-.Nav_dropdown:hover .Nav_droplinks {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.Nav_dropdown:hover .dropbtn {background-color: #E0A9AF;}
+.bm-menu {
+    background-color: $light-blue;
+}
 </style>

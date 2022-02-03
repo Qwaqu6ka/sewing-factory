@@ -3,27 +3,33 @@ import {createStore} from 'vuex';
 import axios from 'axios';
 import createPersistedState from "vuex-persistedstate";
 
-const baseURL = "http://sewing.mrfox131.software/api/v1/"
+const baseURL = "https://sewing.mrfox131.software/api/v1/"
 
 export default createStore({
     state: {
         token: '',
-        baseStaticURL: "http://sewing.mrfox131.software/"
+        baseStaticURL: "https://sewing.mrfox131.software/",
+        profile: {}
     },
     mutations: {
         setToken(state, token) {
             state.token = token;
+        },
+        setProfile(state, profile) {
+            console.log("setting profile: ", profile)
+            state.profile = profile
         }
     },
     actions: {
-        login({commit}, payload) {
+        login({commit, dispatch}, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(baseURL + "plane_login",
+                axios.post(baseURL + "plane_login/",
                     payload
                 ).then((response) => {
                     console.log("Logged in successfully")
                     console.log(response)
                     commit("setToken", response.data.access_token)
+                    dispatch("getProfile")
                     resolve()
                 }).catch((err) => {
                     console.log(err)
@@ -31,7 +37,7 @@ export default createStore({
                 })
             })
         },
-        getProfile({state}) {
+        getProfile({state, commit}) {
             return new Promise((resolve, reject) => {
                 axios.get(
                     baseURL + "me",
@@ -41,6 +47,7 @@ export default createStore({
                         }
                     }
                 ).then((response) => {
+                    commit("setProfile", response.data)
                     resolve(response.data);
                 }).catch((err) => {
                     reject(err)
