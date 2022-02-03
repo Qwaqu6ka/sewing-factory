@@ -1,48 +1,48 @@
 <template>
-    <div class="Layout">
-        <h1 class="Layout__title">Создать фурнитуру</h1>
-        <h2 class="Layout__title" v-if="success">Успешно создана</h2>
-        <h2 class="Layout__title" v-if="error">Возникла ошибка, проверьте артикул</h2>
+    <div class="MainLayout">
+        <h1>Добавить фурнитуру</h1>
+        <h2 v-if="success">Успешно создана</h2>
+        <h2 v-if="error">Возникла ошибка, проверьте артикул</h2>
         
-        <form class="Form" @submit="onSubmit">
-            <div class="Form__group">
-                <span class="Form__title">Артикул</span>
-                <eva-input class="Form__input" placeholder="Артикул" status="warning" v-model="article" required/>
+        <form class="AddForm" @submit="onSubmit">
+            <div class="AddForm__group">
+                <span class="AddForm__title">Артикул</span>
+                <eva-input class="AddForm__input" placeholder="Артикул" status="warning" v-model="article" required type="number"/>
             </div>
-            <div class="Form__group">
-                <span class="Form__title">Название</span>
-                <eva-input class="Form__input" placeholder="Название" status="warning" v-model="name" required/>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Название</span>
+                <eva-input class="AddForm__input" placeholder="Название" status="warning" v-model="name" required/>
             </div>
-            <div class="Form__group">
-                <span class="Form__title">Тип</span>
-                <eva-input class="Form__input" placeholder="Тип" status="warning" v-model="type" required/>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Тип</span>
+                <eva-input class="AddForm__input" placeholder="Тип" status="warning" v-model="type" required/>
             </div>
-            <div class="Form__group">
-                <span class="Form__title">Ширина</span>
-                <eva-input class="Form__input" placeholder="Ширина" status="warning" v-model="width" required type="number"/>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Ширина</span>
+                <eva-input class="AddForm__input" placeholder="Ширина" status="warning" v-model="width" required type="number"/>
             </div>
-            <div class="Form__group">
-                <span class="Form__title">Длина</span>
-                <eva-input class="Form__input" placeholder="Длина" status="warning" v-model="length" required type="number"/>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Длина</span>
+                <eva-input class="AddForm__input" placeholder="Длина" status="warning" v-model="length" required type="number"/>
             </div>
-            <div class="Form__group">
-                <span class="Form__title">Вес</span>
-                <eva-input class="Form__input" placeholder="Вес" status="warning" v-model="weight" required type="number"/>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Вес</span>
+                <eva-input class="AddForm__input" placeholder="Вес" status="warning" v-model="weight" required type="number"/>
             </div>
-            <div class="Form__group">
-                <span class="Form__title">Цена</span>
-                <eva-input class="Form__input" placeholder="Цена" status="warning" v-model="price" required type="number"/>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Цена</span>
+                <eva-input class="AddForm__input" placeholder="Цена" status="warning" v-model="price" required type="number"/>
             </div>
-            <div class="Form__group Form__group_horizontal">
-                <span class="Form__title">Можно измерять в кг?</span>
-                <input class="Form__input" name="image" v-model="kg" type="checkbox"/>
+            <div class="AddForm__group AddForm__group_horizontal">
+                <span class="AddForm__title">Можно измерять в кг?</span>
+                <input class="AddForm__input" name="image" v-model="kg" type="checkbox"/>
             </div>
-            <div class="Form__group Form__group_horizontal">
-                <span class="Form__title">Фото</span>
-                <input class="Form__input" id="photo" placeholder="Фото" name="image" required  type="file"/>
+            <div class="AddForm__group AddForm__group_horizontal">
+                <span class="AddForm__title">Фото</span>
+                <input class="AddForm__input" id="photo" placeholder="Фото" name="image" required  type="file"/>
             </div>
 
-            <button class="Button" type="submit">Создать</button>
+            <button class="AddForm__button Button" type="submit">Создать</button>
         </form>
     </div>
 </template>
@@ -108,16 +108,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/styles/variables.scss";
-
-    .Layout {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .Form {
+    .AddForm {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -137,10 +130,10 @@ export default {
             font-size: toRem(20px);
             margin: 10px;
         }
-    }
 
-    .Button {
-        margin-top: 10px;
-        margin-bottom: 30px;
+        &__button {
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
     }
 </style>

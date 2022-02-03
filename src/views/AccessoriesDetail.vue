@@ -1,37 +1,39 @@
 <template>
-    <div class="Layout">
-    <div class="InnerLayout">
-        <div class="Item">
-            <img class="Item_img" :src="baseStaticURL+data.accessory.image" alt="">
-            <div class="Item_table">
-                <div class="Item_properties">
-                    <span class="Item_property">Наименование</span>
-                    <span class="Item_property">Артикул</span>
-                    <span class="Item_property">Тип</span>
-                    <span class="Item_property">Длина</span>
-                    <span class="Item_property">Ширина</span>
-                    <span class="Item_property">Вес</span>
-                    <span class="Item_property">Количество</span>
-                </div>
-                <div class="Item_properties">
-                    <span class="Item_property">{{ data.accessory.name }}</span>
-                    <span class="Item_property">{{ data.accessory.article }}</span>
-                    <span class="Item_property">{{ data.accessory.type }}</span>
-                    <span class="Item_property">{{ data.accessory.length }}</span>
-                    <span class="Item_property">{{ data.accessory.width }}</span>
-                    <span class="Item_property">{{ data.accessory.weight }}</span>
-                    <span class="Item_property">{{ data.count }}</span>
-                </div>
+    <div class="MainLayout">
+        <div class="ItemDetails">
+            <img class="ItemDetails__img" :src="baseStaticURL+data.accessory.image" alt="">
+            <table class="ItemDetails__table">
+                <thead>
+                    <tr>
+                        <td>Наименование</td>
+                        <td>Артикул</td>
+                        <td>Тип</td>
+                        <td>Длина</td>
+                        <td>Ширина</td>
+                        <td>Вес</td>
+                        <td>Количество, шт</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ data.accessory.name }}</td>
+                        <td>{{ data.accessory.article }}</td>
+                        <td>{{ data.accessory.type }}</td>
+                        <td>{{ data.accessory.length }}</td>
+                        <td>{{ data.accessory.width }}</td>
+                        <td>{{ data.accessory.weight }}</td>
+                        <td>{{ data.amount }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="Decommission">
+            <eva-input placeholder="Списать" status="warning" v-model="count" required type="number"/>
+            <div class="Decommission__buttonGroup">
+                <button class="Decommission__button Button" type="button" @click="onDecommision">Списать, шт</button>
+                <button v-if="data.accessory.kg_acceptable == true" class="Decommission__button Button" type="button" @click="onDecommisionInKg">Списать, кг</button>
             </div>
         </div>
-        <div class="Cancel">
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Количество товара" name="name"  id='name' required v-model="count"/>
-                <label for="name" class="form__label">Количество товара</label>
-            </div>
-            <button class="Cancel_button Button" type="button" @click="onDecommision">Списать</button>
-        </div>
-    </div>
     </div>
 </template>
 
@@ -46,7 +48,7 @@ export default {
     setup(props) {
         const store = useStore()
         const data = ref({})
-        const count = ref(0)
+        const count = ref(null)
         const router = useRoute()
 
         store.dispatch("getAccessoryDetails", router.params.id).then((data_) => {
@@ -57,7 +59,15 @@ export default {
         const onDecommision = () => {
             store.dispatch("accessoryDecommission", {article:data.value.article, count:count.value})
             .then(()=>{
-                data.value.count -= count.value
+                data.value.amount -= count.value
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
+        const onDecommisionInKg = () => {
+            store.dispatch("accessoryDecommissionInKg", {article:data.value.article, count:count.value})
+            .then(()=>{
+                data.value.amount -= parseInt(count.value / data.value.accessory.weight)
             }).catch((err) => {
                 console.log(err)
             })
@@ -67,54 +77,85 @@ export default {
             data,
             count,
             onDecommision,
+            onDecommisionInKg,
             baseStaticURL: store.state.baseStaticURL
         }
     }
 }
 </script>
 
-<style scoped lang="scss">
-    .Item {
+<style lang="scss">
+@import "@/styles/media.scss";
+@import "@/styles/variables.scss";
+    .DetailsLayout {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .ItemDetails {
         display: flex;
         flex-direction: row;
         align-self: center;
-        margin-top: 40px;
-        align-items: flex-start;
+        align-items: center;
 
-        &_table {
-            display: flex;
-            flex-direction: row;
-        }
-
-        &_img {
-            display: block;
-            max-width: 300px;
-            height: auto;
-            object-fit: scale-down;
-            margin-right: 30px;
-        }
-
-        &_properties {
-            display: flex;
+        @include vw-sm-down {
             flex-direction: column;
         }
 
-        &_property {
-            border: solid 1px;
-            padding: 20px;
-            font-size: 1.25rem;
+        &__table {
+            display: flex;
+            flex-direction: row;
+            font-size: toRem(20px);
+            padding-left: 5px;
+            padding-right: 5px;
+            text-overflow: ellipsis;
+            
+            @include vw-xs-down {
+                width: 320px;
+            }
+
+            tr {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
+
+            td {
+                border: solid black 1px;
+                padding: 10px;
+            }
+        }
+
+        &__img {
+            display: block;
+            max-width: 200px;
+            height: auto;
+            object-fit: scale-down;
+            margin-right: 30px;
+
+            @include vw-sm-down {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
         }
     }
 
-    .Cancel {
+    .Decommission {
         display: flex;
-        flex-direction: row;
-        align-self: center;
+        flex-direction: column;
+        align-items: center;
         margin-top: 30px;
-        margin-bottom: 50px;
 
-        &_button {
-            margin-left: 20px;
+        &__buttonGroup {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        &__button {
+            margin-left: 10px;
+            margin-right: 10px;
         }
     }
 </style>

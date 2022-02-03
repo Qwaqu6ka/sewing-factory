@@ -64,6 +64,14 @@ export default {
     }
 }
 
+.MainLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 // Стили таблиц в детализациях
 .Item {
     display: flex;

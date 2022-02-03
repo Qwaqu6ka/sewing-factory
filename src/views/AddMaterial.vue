@@ -1,47 +1,45 @@
 <template>
-    <div class="Layout">
-        <div class="InnerLayout">
-            <h1 class="Login_title">Создать ткань</h1>
-            <h2 class="Login_title" v-if="success">Успешно создана</h2>
-            <h2 class="Login_title" v-if="error">Возникла ошибка, проверьте артикул</h2>
-            <form  @submit="onSubmit">
+    <div class="MainLayout">
+        <h1>Добавить ткань</h1>
+        <h2 v-if="success">Успешно создана</h2>
+        <h2 v-if="error">Возникла ошибка, проверьте артикул</h2>
+        
+        <form class="AddForm" @submit="onSubmit">
+            <div class="AddForm__group">
+                <span class="AddForm__title">Артикул</span>
+                <eva-input class="AddForm__input" placeholder="Артикул" status="warning" v-model="article" required type="number"/>
+            </div>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Название</span>
+                <eva-input class="AddForm__input" placeholder="Название" status="warning" v-model="name" required/>
+            </div>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Цвет</span>
+                <eva-input class="AddForm__input" placeholder="Цвет" status="warning" v-model="color" required/>
+            </div>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Ширина</span>
+                <eva-input class="AddForm__input" placeholder="Ширина" status="warning" v-model="width" required type="number"/>
+            </div>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Принт</span>
+                <eva-input class="AddForm__input" placeholder="Принт" status="warning" v-model="print" required/>
+            </div>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Состав</span>
+                <eva-input class="AddForm__input" placeholder="Состав" status="warning" v-model="composition" required/>
+            </div>
+            <div class="AddForm__group">
+                <span class="AddForm__title">Цена</span>
+                <eva-input class="AddForm__input" placeholder="Цена" status="warning" v-model="price" required type="number"/>
+            </div>
+            <div class="AddForm__group AddForm__group_horizontal">
+                <span class="AddForm__title">Фото</span>
+                <input class="AddForm__input" id="photo" placeholder="Фото" name="image" required  type="file"/>
+            </div>
 
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Артикул" name="article" required v-model="article"/>
-                    <label for="article" class="form__label">Артикул</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Название" name="name"  required v-model="name"/>
-                    <label for="name" class="form__label">Название</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Цвет" name="color"  required v-model="color" type="number"/>
-                    <label for="color" class="form__label">Цвет</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Принт" name="print"  required v-model="print"/>
-                    <label for="print" class="form__label">Принт</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Ширина" name="width"  required type="number" v-model="width"/>
-                    <label for="width" class="form__label">Ширина</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Состав" name="composition"  required v-model="composition"/>
-                    <label for="composition" class="form__label">Состав</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input class="form__field" placeholder="Цена" name="price"  required v-model="price" type="number"/>
-                    <label for="price" class="form__label">Цена</label>
-                </div>
-                <div class="AddInput Login_form form__group field">
-                    <input id="smth" class="form__field" placeholder="Фото" name="image"  required  type="file"/>
-                    <label for="imag" class="form__label">Фото</label>
-                </div>
-
-                <button class="Login_button Button" type="submit">Создать</button>
-            </form>
-        </div>
+            <button class="AddForm__button Button" type="submit">Создать</button>
+        </form>
     </div>
 </template>
 
@@ -50,15 +48,17 @@ import { useStore } from 'vuex';
 import { ref } from 'vue';
 
 export default {
-    name: "AddAccessory",
+    name: "AddMaterial",
     setup() {
+        const article = ref(null)
         const name = ref('')
-        const price = ref(0)
-        const weight = ref(0)
-        const width = ref(0)
-        const length = ref(0)
-        const type = ref('')
-        const article = ref(0)
+        const price = ref(null)
+        const composition = ref('')
+        const width = ref(null)
+        const print = ref('')
+        const color = ref('')
+
+        
         const store = useStore()
         const error = ref(false)
         const success = ref(false)
@@ -69,14 +69,14 @@ export default {
             const formData = new FormData();
             formData.append('name', name.value)
             formData.append('price', price.value)
-            formData.append('weight', weight.value)
-            formData.append('length', length.value)
-            formData.append('type', type.value)
+            formData.append('composition', composition.value)
+            formData.append('color', color.value)
+            formData.append('print', print.value)
             formData.append('article', article.value)
             formData.append('width', width.value)
-            formData.append('image', document.getElementById('smth').files[0])
+            formData.append('image', document.getElementById('photo').files[0])
             // formData.append('update', update.value)
-            store.dispatch("createNewAccessory", formData)
+            store.dispatch("createNewMaterial", formData)
             .then((data) => {
                 error.value = false
                 success.value = true
@@ -90,10 +90,10 @@ export default {
             onSubmit,
             name,
             price,
-            weight,
+            composition,
             width,
-            length,
-            type,
+            print,
+            color,
             article,
             error,
             success,
@@ -102,27 +102,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-    form {
-        max-width: 70%;
-    }
-
-    .InnerLayout {
-        display: flex;
-        align-items: center;
-        flex-grow: 1;
-        background-color: white;
-        button {
-            margin-top: 10px;
-        }
-    }
-
-    .Button {
-        margin-bottom: 30px;
-    }
-
-    .AddInput {
-        margin-bottom: 15px;
-    }
-</style>

@@ -1,32 +1,38 @@
 <template>
-    <div class="Layout">
-    <div class="InnerLayout">
-        <div class="Item">
-            <img class="Item_img" :src="baseStaticURL+data.image" alt="">
-            <div class="Item_table">
-                <div class="Item_properties">
-                    <span class="Item_property">Название</span>
-                    <span class="Item_property">Артикул</span>
-                    <span class="Item_property">Длина</span>
-                    <span class="Item_property">Ширина</span>
-                    <span class="Item_property">Стоимость</span>
-                </div>
-                <div class="Item_properties">
-                    <span class="Item_property">{{ data.name }}</span>
-                    <span class="Item_property">{{ data.article }}</span>
-                    <span class="Item_property">{{ data.length }}</span>
-                    <span class="Item_property">{{ data.width }}</span>
-                    <span class="Item_property">{{ data.price }}</span>
-                </div>
-            </div>
+    <div class="MainLayout">
+        <div class="ItemDetails">
+            <img class="ItemDetails__img" :src="baseStaticURL+data.image" alt="">
+            <table class="ItemDetails__table">
+                <thead>
+                    <tr>
+                        <td>Наименование</td>
+                        <td>Артикул</td>
+                        <td>Длина</td>
+                        <td>Ширина</td>
+                        <td>Стоимость</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.article }}</td>
+                        <td>{{ data.length }}</td>
+                        <td>{{ data.width }}</td>
+                        <td>{{ data.price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="Comment">
+            {{data.comment}}
         </div>
 
         <div class="Used">
-            <div class="Used_clothes">
-                {{data.comment}}<br>
+            <div class="Used__clothes">
                 Используемые ткани:
                 <router-link
-                    class="Used_link"
+                    class="Used__link"
                     v-for="cloth in data.clothes"
                     v-bind:key="cloth.article"
                     :to="'/nomenclature/materials/'+cloth.article"
@@ -34,10 +40,10 @@
                     {{ cloth.name }}
                 </router-link>
             </div>
-            <div class="Used_access">
+            <div class="Used__access">
                 Используемая фурнитура:
                 <router-link
-                    class="Used_link"
+                    class="Used__link"
                     v-for="access in data.accessories"
                     v-bind:key="access.article"
                     :to="'/nomenclature/accessories/'+access.article"
@@ -47,14 +53,12 @@
             </div>
         </div>
 
-        <h2 v-if="prev.length > 0" class="Title">История изменеий</h2>
+        <h2 v-if="prev.length > 0">История изменеий</h2>
         <ProductHistory
             v-for="item in prev"
             :key="item.id"
             :data="item"
         />
-
-    </div>
     </div>
 </template>
 
@@ -91,80 +95,27 @@ export default {
             baseStaticURL: store.state.baseStaticURL
         }
     },
-    // data() {
-    //     return {
-    //         clothes: [
-    //             {
-    //                 name: "Черная ночь",
-    //                 article: 1,
-    //             },
-    //             {
-    //                 name: "Багровая луна",
-    //                 article: 2,
-    //             },
-    //         ],
-    //         accessories: [
-    //             {
-    //                 name: "Брошь с красным камнем",
-    //                 article: 1,
-    //             },
-    //             {
-    //                 name: "Чёрная пуговица \"Светлана\"",
-    //                 article: 2,
-    //             },
-    //         ],
-    //         previous: [
-    //             {
-    //                 id: 0,
-    //                 article: 0,
-    //                 name: "qwerty",
-    //                 width: 0,
-    //                 length: 0,
-    //                 image: "qwerty",
-    //                 comment: "qwerty",
-    //                 price: 0,
-    //                 clothes: [
-    //                     {
-    //                         article: 0,
-    //                         name: "qwerty",
-    //                         color: "qwerty",
-    //                         print: "qwerty",
-    //                         image: "qwerty",
-    //                         composition: "qwerty",
-    //                         width: 0,
-    //                         price: 0
-    //                     }
-    //                 ],
-    //                 accessories: [
-    //                     {
-    //                         article: 0,
-    //                         name: "qwerty",
-    //                         type: "qwerty",
-    //                         width: 0,
-    //                         length: 0,
-    //                         weight: 0,
-    //                         image: "qwerty",
-    //                         price: 0
-    //                     }
-    //                 ],
-    //                 previouss: "qwerty"
-    //             },
-    //         ],
-    //     }
-    // },
 }
 </script>
 
 <style lang="scss">
+@import "@/styles/media.scss";
+@import "@/styles/variables.scss";
+    .Comment {
+        font-size: toRem(20px);
+        font-style: italic;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
     .Used {
         display: flex;
         flex-direction: column;
-        margin: 35px 70px 35px;
         line-height: 1.5;
+        max-width: 85%;
 
         a {
             text-decoration: none;
-            color: #FF6C2E;
+            color: $secondary-color;
             transition: color 0.25s ease-in-out;
 
             &:hover, &:active {
@@ -172,29 +123,23 @@ export default {
             }
         }
 
-        &_clothes {
-            margin-top: 15px;
+        &__clothes {
+            margin-bottom: 15px;
 
             :not(:last-child) {
                 &::after {
                     content: ", ";
-
                 }
             }
         }
 
-        &_access {
+        &__access {
             margin-top: 15px;
             :not(:last-child) {
                 &::after {
                     content: ", ";
-
                 }
             }
         }
-    }
-
-    .Title {
-        margin-left: 80px;
     }
 </style>

@@ -165,6 +165,22 @@ export default createStore({
                 })
             })
         },
+        accessoryDecommissionInKg({state}, payload) {
+            return new Promise((resolve, reject) => {
+                axios.patch(baseURL + "accessory_in_kg/" + payload.article + "?amount=" + payload.count.toString(),
+                    {},
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                    .then((response) => {
+                        resolve()
+                    }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
         getClothDetails({state}, article) {
             return new Promise((resolve, reject) => {
                 axios.get(baseURL + "cloth/" + article,
@@ -250,6 +266,23 @@ export default createStore({
             return new Promise((resolve, reject) => {
                 axios.post(
                     baseURL + "accessory",
+                    payload,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    })
+                .then((data) => {
+                    resolve(data.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+        createNewMaterial({state}, payload) {
+            return new Promise((resolve, reject) => {
+                axios.post(
+                    baseURL + "cloth",
                     payload,
                     {
                         headers: {
