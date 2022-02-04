@@ -1,13 +1,12 @@
 <template>
-    <div class="OrderTable_row">
-        <router-link
-            class="OrderTable_cell"
-            :to="'/nomenclature/products/'+product.article"
-        >
-            {{ product.name }}
-        </router-link>
-        <span class="OrderTable_cell OrderTable_count">{{ count }}</span>
-    </div>
+    <tr>
+        <td>
+            <router-link :to="'/nomenclature/products/'+product.article">
+                {{ product.name }}
+            </router-link>
+        </td>
+        <td>{{ count }}</td>
+    </tr>
 </template>
 
 <script>

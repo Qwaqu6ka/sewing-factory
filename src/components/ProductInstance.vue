@@ -1,9 +1,9 @@
 <template>
     <div @click="clicked" class="Product">
-        <img class="Product_img" :src="card.image" alt="">
-        <div class="Product_description">
-            <span class="Product_name">{{ card.name }}</span>
-            <span class="Product_article">Артикул: {{ card.article }}</span>
+        <img class="Product__img" :src="card.image" alt="">
+        <div class="Product__description">
+            <span class="Product__name">{{ card.name }}</span>
+            <span class="Product__article">Артикул: {{ card.article }}</span>
         </div>
     </div>
 </template>
@@ -43,45 +43,53 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    $paddingX: 20px;
-
+@import "@/styles/media.scss";
+@import "@/styles/variables.scss";
     .Product {
         display: flex;
         flex-direction: row;
         border: solid 1px;
         border-radius: 10px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-left: 80px;
-        margin-right: 80px;
         background-color: #EEF9FF;
         transition: box-shadow 0.25s ease-in-out;
+        min-width: 70%;
+        margin-top: 25px;
+        align-items: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        min-height: 160px;
+
+        @include vw-sm-down {
+            flex-direction: column;
+        }
 
         &:hover, &:focus {
             box-shadow: 5px 10px 16px 0px rgba(0,0,0,0.5);
         }
 
-        &_img {
+        &__img {
             width: 140px;
             padding: 10px;
         }
 
-        &_description {
-            display: grid;
-            grid-template-rows: repeat(2, 1fr);
-            align-items: center;
-            margin-left: 30px;
-            padding-top: $paddingX;
-            padding-bottom: $paddingX;
+        &__description {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+
+            @include vw-sm-down {
+                align-items: center;
+            }
         }
 
-        &_name {
+        &__name {
             font-size: 2rem;
             margin-bottom: 10px;
+            text-align: center;
         }
 
-        &_article {
+        &__article {
             color: #949494;
             font-size: 1.25rem;
         }

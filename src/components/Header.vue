@@ -31,9 +31,10 @@
                 right :burgerIcon="false" 
                 :isOpen="isOpen" 
                 @closeMenu="isOpen = false" 
-                :closeOnNavigation="true"
+                
                 noOverlay
             >
+            <!-- :closeOnNavigation="true" -->
                 <Nav :vertical="true" />
             </Slide>
         </teleport>
@@ -60,7 +61,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/styles/variables.scss";
 @import "@/styles/media.scss";
 
@@ -132,6 +133,6 @@ header {
 }
 
 .bm-menu {
-    background-color: $light-blue;
+    background-color: $dim-white;
 }
 </style>

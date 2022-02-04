@@ -1,6 +1,6 @@
 <template>
-    <div class="OrderLayout">
-        <h2 class="Title">Список заказов</h2>
+    <div class="MainLayout">
+        <h2>Список заказов</h2>
         <OrderInstance
             class="Instance"
             v-for="card of cards"
@@ -34,18 +34,3 @@ export default {
     }
 }
 </script>
-
-<style scoped lang="scss">
-    .TableLayout {
-        display: flex;
-        justify-content: center;
-    }
-
-    .Title {
-        margin: 30px 80px
-    }
-
-    .Instance {
-        margin-bottom: 30px;
-    }
-</style>

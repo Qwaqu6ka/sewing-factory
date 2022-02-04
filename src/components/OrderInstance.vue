@@ -1,18 +1,24 @@
 <template>
     <div class="Order" @click="push_to_id">
-        <img v-if="wait" class="Order_img" src="@/assets/icons/waiting_status.svg">
-        <img v-if="reject" class="Order_img" src="@/assets/icons/reject_status.svg">
-        <img v-if="complete" class="Order_img" src="@/assets/icons/complete_status.svg">
-        <div class="Order_feautersContainer">
-            <span class="Order_feature Order_text">Номер:</span>
-            <span class="Order_feature Order_text">Заказчик:</span>
-            <span class="Order_feature Order_text">Статус:</span>
-        </div>
-        <div class="Order_feautersContainer">
-            <span class="Order_value Order_text">{{ card.id }}</span>
-            <span class="Order_value Order_text">{{ card.customer.name }}</span>
-            <span class="Order_value Order_text">{{ card.stage }}</span>
-        </div>
+        <img v-if="wait" class="Order__img" src="@/assets/icons/waiting_status.svg">
+        <img v-if="reject" class="Order__img" src="@/assets/icons/reject_status.svg">
+        <img v-if="complete" class="Order__img" src="@/assets/icons/complete_status.svg">
+        <table class="Order__table">
+            <thead>
+                <tr>
+                    <td>Номер:</td>
+                    <td>Заказчик:</td>
+                    <td>Статус:</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ card.id }}</td>
+                    <td>{{ card.customer.name }}</td>
+                    <td>{{ card.stage }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -52,48 +58,55 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+@import "@/styles/media.scss";
+@import "@/styles/variables.scss";
     .Order {
         display: flex;
         flex-direction: row;
         border: solid 1px;
         border-radius: 10px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        align-items: center;
-        justify-content: flex-start;
-        margin-left: 80px;
-        margin-right: 80px;
         background-color: #EEF9FF;
         padding: 20px;
+        align-items: center;
         transition: box-shadow 0.25s ease-in-out;
+
+        @include vw-sm-down {
+            flex-direction: column;
+        }
 
         &:hover, &:focus {
             box-shadow: 5px 10px 16px 0px rgba(0,0,0,0.5);
         }
 
-        &_img {
+        &__img {
             width: 100px;
             padding: 10px;
             margin-right: 30px;
         }
 
-        &_feautersContainer {
+        &__table {
             display: flex;
-            flex-direction: column;
-        }
+            flex-direction: row;
+            font-size: toRem(20px);
+            padding-left: 5px;
+            padding-right: 5px;
+            text-overflow: ellipsis;
+            
+            @include vw-xs-down {
+                width: 320px;
+            }
 
-        &_feature {
-            align-self: flex-end;
-            padding: 5px;
-        }
+            tr {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
 
-        &_value {
-            align-self: flex-start;
-            padding: 5px;
-        }
-
-        &_text {
-            font-size: 1.25rem;
+            td {
+                padding: 10px;
+            }
         }
     }
 </style>

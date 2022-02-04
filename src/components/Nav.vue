@@ -54,13 +54,6 @@ export default {
     @include vw-sm-down {
         display: none;
     }
-    
-    &_vertical {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0;
-    }
 
     a {
         font-size: toRem(18px);
@@ -68,6 +61,16 @@ export default {
         padding: 12px 16px;
         text-decoration: none;
         transition: color 0.25s ease-in-out;
+    }
+
+    &_vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        a {
+           font-size: toRem(25px); 
+        }
     }
 
     /* The container <div> - needed to position the dropdown content */
@@ -106,10 +109,10 @@ export default {
 
         &_vertical {
             a {
-                font-size: toRem(18px);
                 color: white;
                 padding: 12px 16px;
                 text-decoration: none;
+                margin-bottom: 20px;
                 transition: color 0.25s ease-in-out;
             }
         }

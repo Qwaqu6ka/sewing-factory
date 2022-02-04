@@ -1,8 +1,8 @@
 <template>
-    <div class="Layout">
+    <div class="MainLayout">
         <div class="ProfileCard">
             <span class="ProfileCard_name">{{ userdata.name }}</span>
-            <span class="ProfileCard_account">Тип аккаунта: {{ userdata.role }}</span>
+            <span>Тип аккаунта: {{ userdata.role }}</span>
             <button class="ProfileCard_button Button" type="button" @click="logout">Выйти</button>
         </div>
     </div>
@@ -43,20 +43,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/media.scss";
+@import "@/styles/variables.scss";
     .ProfileCard {
         display: flex;
         flex-direction: column;
         background-color: white;
         border-radius: 10px;
-        padding: 30px;
-        margin-top: 20px;
+        padding: 5px;
+        font-size: toRem(25px);
 
         &_name {
             margin-bottom: 20px;
-        }
-
-        &_account {
-
+            text-align: center;
         }
 
         &_button {

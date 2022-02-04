@@ -1,28 +1,30 @@
 <template>
-    <div class="Layout">
-    <div class="InnerLayout">
+    <div class="MainLayout">
         <div class="OrderDetails">
-            <h2 class="OrderDetails_text">Заказ {{order.id}}</h2>
-            <span class="OrderDetails_text">Дата создания: {{order.creation_date}}</span>
-            <span class="OrderDetails_text">Дата завершения: {{order.completion_date}}</span>
-            <span class="OrderDetails_text">Статус: {{order.stage}}</span>
-            <span class="OrderDetails_text">Менеджер: {{order.manager.name}}</span>
-            <span class="OrderDetails_text">Покупатель: {{order.customer.name}}</span>
-            <span class="OrderDetails_text">Сумма заказа: {{order.cost}}</span>
+            <h2 class="OrderDetails__text">Заказ {{order.id}}</h2>
+            <span class="OrderDetails__text">Дата создания: {{order.creation_date}}</span>
+            <span class="OrderDetails__text">Дата завершения: {{order.completion_date}}</span>
+            <span class="OrderDetails__text">Статус: {{order.stage}}</span>
+            <span class="OrderDetails__text">Менеджер: {{order.manager.name}}</span>
+            <span class="OrderDetails__text">Покупатель: {{order.customer.name}}</span>
+            <span class="OrderDetails__text">Сумма заказа: {{order.cost}}</span>
         </div>
-        <div class="OrderTable">
-            <div class="OrderTable_row">
-                <span class="OrderTable_cell OrderTable_name">Товар</span>
-                <span class="OrderTable_cell OrderTable_count">Количество</span>
-            </div>
-            <TableElem
-                v-for="elem in data"
-                :key="elem.product.article"
-                :product="elem.product"
-                :count="elem.count"
-            />
-        </div>
-    </div>
+        <table class="OrderTable">
+            <thead>
+                <tr>
+                    <td>Товар</td>
+                    <td>Количество</td>
+                </tr>
+            </thead>
+            <tbody>
+                <TableElem
+                    v-for="elem in data"
+                    :key="elem.product.article"
+                    :product="elem.product"
+                    :count="elem.count"
+                />
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -58,64 +60,45 @@ export default {
         }
 
     },
-    // data() {
-    //     return {
-    //         data: [
-    //             {
-    //                 product: {
-    //                     name: "prod1",
-    //                     article: 1,
-    //                 },
-    //                 count: 5,
-    //             },
-    //             {
-    //                 product: {
-    //                     name: "prod2",
-    //                     article: 2,
-    //                 },
-    //                 count: 25,
-    //             },
-    //         ],
-    //     }
-    // }
 }
 </script>
 
 <style lang="scss">
+@import "@/styles/media.scss";
+@import "@/styles/variables.scss";
 .OrderDetails {
     display: flex;
     flex-direction: column;
-    margin: 10px 80px 35px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
     line-height: 1.5;
+
+    &__text {
+        font-size: toRem(20px);
+        margin-bottom: 10px;
+    }
 }
 
 .OrderTable {
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 30px;
+    font-size: toRem(20px);
+    padding-left: 5px;
+    padding-right: 5px;
+    text-overflow: ellipsis;
 
-    &_row {
-        display: flex;
-        flex-direction: row;
-        align-self: center;
-
-        a {
-            text-decoration: none;
-            color:black;
-            transition: color 0.25s ease-in-out;
-
-            &:hover, &:active {
-               color: #FF6C2E;
-            }
-        }
+    @include vw-xs-down {
+        width: 320px;
     }
 
-    &_cell {
-        border: solid 1px black;
+    // tr {
+    //     display: flex;
+    //     flex-direction: column;
+    //     flex-wrap: wrap;
+    // }
+
+    td {
+        border: solid black 1px;
         padding: 10px;
-        width: 350px;
-        word-wrap: break-word;
     }
 }
 </style>

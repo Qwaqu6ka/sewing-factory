@@ -1,39 +1,40 @@
 <template>
-    <div class="Layout">
-    <div class="InnerLayout">
-        <div class="Item">
-            <img class="Item_img" :src="baseStaticURL+data.image" alt="">
-            <div class="Item_table">
-                <div class="Item_properties">
-                    <span class="Item_property">Артикул</span>
-                    <span class="Item_property">Название</span>
-                    <span class="Item_property">Цвет</span>
-                    <span class="Item_property">Изображение</span>
-                    <span class="Item_property">Ширина</span>
-                    <span class="Item_property">Цена за метр</span>
-                </div>
-                <div class="Item_properties">
-                    <span class="Item_property">{{data.article}}</span>
-                    <span class="Item_property">{{data.name}}</span>
-                    <span class="Item_property">{{ data.color }}</span>
-                    <span class="Item_property">{{ data.print }}</span>
-                    <span class="Item_property">{{ data.width }}</span>
-                    <span class="Item_property">{{ data.price }}</span>
-                </div>
-            </div>
+    <div class="MainLayout">
+        <div class="ItemDetails">
+            <img class="ItemDetails__img" :src="baseStaticURL+data.image" alt="">
+            <table class="ItemDetails__table">
+                <thead>
+                    <tr>
+                        <td>Артикул</td>
+                        <td>Наименование</td>
+                        <td>Цвет</td>
+                        <td>Принт</td>
+                        <td>Ширина</td>
+                        <td>Цена за метр</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ data.article }}</td>
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.color }}</td>
+                        <td>{{ data.print }}</td>
+                        <td>{{ data.width }}</td>
+                        <td>{{ data.price }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-    <h2 class="Rolls_title">Рулоны</h2>
-    <div class="Rolls">
-        <span v-show="rolls.length === 0" class="Rolls_nothing">Нет в наличии</span>
-        <Roll
-            v-for="roll in rolls"
-            v-bind:key="roll.number"
-            v-bind:item="roll"
-        />
-    </div>
-
-    </div>
+        <h2 class="Rolls_title">Рулоны</h2>
+        <div class="Rolls">
+            <span v-show="rolls.length === 0" class="Rolls_nothing">Нет в наличии</span>
+            <Roll
+                v-for="roll in rolls"
+                v-bind:key="roll.number"
+                v-bind:item="roll"
+            />
+        </div>
     </div>
 </template>
 
@@ -71,36 +72,6 @@ export default {
             baseStaticURL: store.state.baseStaticURL
         }
     },
-//     data() {
-//         return {
-//             rolls: [
-//                 // {
-//                 //     num: 1,
-//                 //     len: 12,
-//                 // },
-//                 // {
-//                 //     num: 2,
-//                 //     len: 0,
-//                 // },
-//                 // {
-//                 //     num: 3,
-//                 //     len: 12,
-//                 // },
-//                 // {
-//                 //     num: 4,
-//                 //     len: 12,
-//                 // },
-//                 // {
-//                 //     num: 5,
-//                 //     len: 124,
-//                 // },
-//                 // {
-//                 //     num: 6,
-//                 //     len: 12,
-//                 // },
-//             ],
-//         }
-//     }
 }
 </script>
 
