@@ -81,24 +81,14 @@ export default {
 }
 
 .OrderTable {
-    font-size: toRem(20px);
     padding-left: 5px;
     padding-right: 5px;
-    text-overflow: ellipsis;
-
-    @include vw-xs-down {
-        width: 320px;
-    }
-
-    // tr {
-    //     display: flex;
-    //     flex-direction: column;
-    //     flex-wrap: wrap;
-    // }
 
     td {
+        font-size: toRem(20px);
         border: solid black 1px;
-        padding: 10px;
+        padding: 15px;
+        word-break: break-all;
     }
 }
 </style>

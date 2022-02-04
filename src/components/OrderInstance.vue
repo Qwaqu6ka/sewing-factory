@@ -69,6 +69,8 @@ export default {
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         background-color: #EEF9FF;
         padding: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
         align-items: center;
         transition: box-shadow 0.25s ease-in-out;
 
@@ -90,13 +92,6 @@ export default {
             display: flex;
             flex-direction: row;
             font-size: toRem(20px);
-            padding-left: 5px;
-            padding-right: 5px;
-            text-overflow: ellipsis;
-            
-            @include vw-xs-down {
-                width: 320px;
-            }
 
             tr {
                 display: flex;
@@ -104,8 +99,13 @@ export default {
                 flex-wrap: wrap;
             }
 
+            tbody {
+                word-break: break-all;
+            }
+
             td {
-                padding: 10px;
+                padding: 8px;
+                word-break: break-all;
             }
         }
     }

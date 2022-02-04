@@ -106,6 +106,7 @@ export default {
         font-style: italic;
         margin-top: 30px;
         margin-bottom: 30px;
+        text-align: center;
     }
     .Used {
         display: flex;

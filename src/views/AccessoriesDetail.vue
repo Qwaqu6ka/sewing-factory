@@ -110,9 +110,9 @@ export default {
             padding-right: 5px;
             text-overflow: ellipsis;
             
-            @include vw-xs-down {
-                width: 320px;
-            }
+            // @include vw-xs-down {
+            //     width: 320px;
+            // }
 
             tr {
                 display: flex;
@@ -123,6 +123,7 @@ export default {
             td {
                 border: solid black 1px;
                 padding: 10px;
+                word-break: break-all;
             }
         }
 
