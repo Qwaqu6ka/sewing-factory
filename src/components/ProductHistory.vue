@@ -4,25 +4,25 @@
             <span class="Used__item">Длина: {{ data.length }}</span>
             <span class="Used__item">Ширина: {{ data.width }}</span>
             <span class="Used__item">Стоимость: {{ data.price }}</span>
-            
+
             <div class="Used__clothes">
-                Используемые ткани: 
-                <router-link 
+                Используемые ткани:
+                <router-link
                     class="Used__link"
                     v-for="cloth in data.clothes"
                     v-bind:key="cloth.article"
-                    :to="'/materials/'+cloth.article"
+                    :to="'/nomenclature/materials/'+cloth.article"
                 >
                     {{ cloth.name }}
                 </router-link>
             </div>
             <div class="Used__access">
-                Используемая фурнитура: 
-                <router-link 
+                Используемая фурнитура:
+                <router-link
                     class="Used__link"
                     v-for="access in data.accessories"
                     v-bind:key="access.article"
-                    :to="'/accessories/'+access.article"
+                    :to="'/nomenclature/accessories/'+access.article"
                 >
                     {{ access.name }}
                 </router-link>

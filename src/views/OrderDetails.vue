@@ -25,6 +25,10 @@
                 />
             </tbody>
         </table>
+        <h3>Карты раскроя для заказа</h3>
+        <template v-for="mapping in mappings">
+            <a target="_blank" :href="'https://sewing.mrfox131.software/'+mapping.map">{{ mapping.article }}: {{mapping.batch_number}}</a>
+        </template>
     </div>
 </template>
 
@@ -44,6 +48,7 @@ export default {
         const data = ref([])
         const store = useStore()
         const route = useRoute()
+        const mappings = ref([])
 
         store.dispatch("getOrderInfo", route.params.id).then((data) => {
             order.value = data
@@ -54,9 +59,14 @@ export default {
             data.value = data_
         })
 
+        store.dispatch("getMappings", route.params.id).then((data_) => {
+            mappings.value = data_
+        })
+
         return {
             order,
-            data
+            data,
+            mappings
         }
 
     },

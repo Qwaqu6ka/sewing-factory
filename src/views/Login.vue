@@ -4,13 +4,11 @@
             <h1 class="Login_title">Вход</h1>
 
             <div class="Login_form form__group field">
-                <input class="form__field" placeholder="Логин" name="login" id='login' required v-model="login"/>
-                <label for="login" class="form__label">Логин</label>
+                <eva-input class="form__field" placeholder="Логин" name="login" id='login' required v-model="login"/>
             </div>
 
             <div class="form__group field">
-                <input type="password" class="form__field" placeholder="Пароль" name="pass" id='pass' required v-model="password"/>
-                <label for="pass" class="form__label">Пароль</label>
+                <eva-input type="password" class="form__field" placeholder="Пароль" name="pass" id='pass' required v-model="password"/>
             </div>
 
             <button class="Login_button Button" type="button" @click="onLogin">Войти</button>
@@ -22,6 +20,7 @@
 import {ref} from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+
 export default {
     name: "Login",
     setup() {

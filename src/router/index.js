@@ -12,6 +12,7 @@ import ProductDetail from '../views/ProductDetail.vue'
 import AddAccessory from "../views/AddAccessory";
 import AddMaterial from "../views/AddMaterial";
 import AddProduct from "../views/AddProduct";
+import MaterialsArrival from "../views/MaterialsArrival";
 
 const routes = [
     {
@@ -82,6 +83,11 @@ const routes = [
         name: 'Add product',
         component: AddProduct
     },
+    {
+        path: '/add/materials_arrival',
+        name: 'Учесть прибытие материалов',
+        component: MaterialsArrival
+    }
 ]
 
 const router = createRouter({

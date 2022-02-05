@@ -327,7 +327,41 @@ export default createStore({
                             reject(err)
                         })
                 })
-        }
+        },
+        goodsArrival({state}, payload) {
+            return new Promise((resolve, reject) => {
+                axios.post(baseURL + "goods_arrival",payload,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    },
+                )
+                    .then((response) => {
+                        resolve(response.data)
+                    })
+                    .catch((err) => {
+                        reject(err)
+                    })
+            })
+        },
+        getMappings({state}, order_id) {
+            return new Promise((resolve, reject) => {
+                axios.get(baseURL + "get_cloth_mappings/"+order_id,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + state.token
+                        }
+                    },
+                )
+                    .then((response) => {
+                        resolve(response.data)
+                    })
+                    .catch((err) => {
+                        reject(err)
+                    })
+            })
+        },
     },
     modules: {},
     plugins: [createPersistedState()]
